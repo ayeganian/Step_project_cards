@@ -31,8 +31,6 @@ window.openModal();
 
 
 
-
-
 // class Modal {
 //   constructor() {
 //     this._modal = null;
