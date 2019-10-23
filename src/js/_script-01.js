@@ -1,7 +1,7 @@
 class Modal {
   constructor(overlay) {
     this.overlay = overlay;
-    const closeButton = overlay.querySelector('.button-close')
+    const closeButton = overlay.querySelector('.button-close');
     closeButton.addEventListener('click', this.close.bind(this));
     overlay.addEventListener('click', e => {
       // if (e.srcElement.id === this.overlay.id) {
@@ -19,9 +19,13 @@ class Modal {
 
 
 }
-const modal = new Modal(document.querySelector('.modal-overlay'));
-window.openModal = modal.open.bind(modal);
-window.openModal();
+const modal = new Modal(document.getElementById('one'));
+const modal2 = new Modal(document.getElementById('two'));
+document.querySelector('.new').openModal = modal.open.bind(modal);
+document.querySelector('.new2').openModal = modal.open.bind(modal2);
+// window.openModal = modal.open.bind(modal);
+// window.openModal = modal.open.bind(modal2);
+// window.openModal();
 
 
 
