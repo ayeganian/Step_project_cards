@@ -21,7 +21,7 @@ class Modal {
 }
 const modal = new Modal(document.querySelector('.modal-overlay'));
 window.openModal = modal.open.bind(modal);
-window.openModal();
+
 
 
 
