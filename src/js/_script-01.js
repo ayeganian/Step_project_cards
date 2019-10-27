@@ -17,7 +17,6 @@ class Modal {
     this.overlay.classList.remove('is-hidden');
   }
 
-
 }
 const modal = new Modal(document.querySelector('.modal-overlay'));
 window.openModal = modal.open.bind(modal);

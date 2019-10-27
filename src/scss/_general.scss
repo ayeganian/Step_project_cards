@@ -1,0 +1,97 @@
+.med-page{
+  background-image: url("/img/176857.jpg");
+  background-size: cover;
+
+
+}
+.navbar{
+  background: rgba(0,0,0,0.4);
+}
+.logo-img{
+  height: 10vh;
+}
+.footer{
+  background: rgba(0,0,0,0.4);
+}
+.cards-desk{
+  background-image: url("/img/176849.jpg") ;
+
+}
+.card-logo{
+  height: 8vh;
+}
+
+//carousel
+#carousel-section{
+  background-color: rgba(46, 46, 46, 0.36);
+}
+.slide-style{
+  height: 60vh;
+}
+.diploma{
+  height: 19vh;
+  width: 8vw;
+}
+.carousel-control-prev {
+  margin-left: -150px;
+}
+.carousel-control-next {
+  margin-right: -150px;
+}
+//counter
+
+#counter{
+  //background-color: rgba(46, 46, 46, 0.36);
+}
+.counter{
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+}
+
+.counter .counter-icon{
+  font-size: 40px;
+  color: #fff;
+  position: absolute;
+  top: 32px;
+  left: 27px;
+  transition: all 0.3s ease 0s;
+}
+
+.counter:hover .counter-icon{ transform: rotateY(360deg); }
+
+.counter .counter-content{
+  color: rgb(138, 59, 151);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-37%, -32%);
+}
+
+.counter .counter-value{
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease 0s;
+}
+
+.counter:hover .counter-value{ text-shadow: 0 0 1px #000; }
+
+.counter .title{
+  font-size: 18px;
+  text-transform: capitalize;
+  padding: 0 10px;
+  margin: 0;
+}
+
+.counter.red .counter-content{ color: rgb(215, 41, 42); }
+
+.counter.green .counter-content{ color: rgba(11, 170, 152, 0.61); }
+
+.counter.orange .counter-content{ color: rgba(244, 133, 41, 0.61); }
+
+@media only screen and (max-width: 990px){
+  .counter{ margin-bottom: 30px; }
+}
