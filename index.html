@@ -13,15 +13,8 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<button onclick="openModal()">Open Modal</button>
-<div class="is-hidden modal-overlay" id="one">
-  <div class="modal">
-    <span class="button-close">×</span>
-
-    </form>
-  </div>
-</div>
-<button onclick="openModal()">Open Modal</button>
+<!--<button onclick="openModal()">Open Modal</button>-->
+<!--<button onclick="openModal()">Open Modal</button>-->
 <div class="is-hidden modal-overlay" id="two">
   <div class="modal">
     <span class="button-close">xx</span>
@@ -30,17 +23,30 @@
     </form>
   </div>
 </div>
-<div onclick="openModal()" class="new" style="width: 50px; height: 50px; background: red"></div>
-<div onclick="openModal()" class="new2" style="width: 50px; height: 50px; background: black"></div>
 
-<div id="test-form"></div>
 <header>
   <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand">Navbar</a>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0 login-btn" onclick="openModal()" type="submit">Login</button>
   </nav>
+<div class="is-hidden modal-overlay login-wrapper" id="login-modal">
+  <div class="modal" id="modal">
+    <span class="button-close">×</span>
+
+
+  </div>
+</div>
 </header>
+
 <section class="cards-desk">
+      <button class="btn btn-outline-success my-2 my-sm-0 add-card-btn" onclick="openModal()" type="submit">+</button>
+  <div class="is-hidden modal-overlay" id="add-card-modal">
+    <div class="modal" id="card-modal">
+      <span class="button-close">×</span>
+
+
+    </div>
+  </div>
 <!--bootstrap card-->
 <div class="card" style="width: 18rem;">
   <div class="card-body">
@@ -51,6 +57,9 @@
   </div>
 </div>
 </section>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

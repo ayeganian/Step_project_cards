@@ -1,3 +1,26 @@
+const data = {
+  email: "annettt@gmail.com",
+  password: "123456"
+};
+const authOptions = {
+  method: 'POST',
+  url: 'http://cards.danit.com.ua/login',
+  data: JSON.stringify(data),
+};
+
+axios(authOptions)
+  .then(function(response) {
+    console.log(response.data);
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
+//        axios.post("/login", data).then(response => console.log(response))
+
+
+
+
 class Modal {
   constructor(overlay) {
     this.overlay = overlay;
@@ -19,48 +42,111 @@ class Modal {
 
 
 }
-const modal = new Modal(document.getElementById('one'));
-const modal2 = new Modal(document.getElementById('two'));
-document.querySelector('.new').openModal = modal.open.bind(modal);
-document.querySelector('.new2').openModal = modal.open.bind(modal2);
-// window.openModal = modal.open.bind(modal);
-// window.openModal = modal.open.bind(modal2);
-// window.openModal();
 
+class Visit {
+  constructor(data) {
+    this._card = null;
+    this._title = data.title;
+    this._name = patientName;
+    this._description = description;
+    this._status = 'open';
+    this._priority = priority;
+  }
 
+  render(wrapper) {
+    this._card = document.createElement("div");
 
+    const cardContent = document.createElement("div");
+    cardContent.className = "card-content";
+    wrapper.append(this._card);
+    this._card.append(cardContent);
+    this._card.addEventListener('click', (event) => {
+      // находим объект в массиве объектов и меняем ему статус
+      if (event.target.classList.contains("btn")) {
+        this.updateStatus(event.target.dataset.status);
+      }
+    })
+  }
 
+  updateStatus(status) {
+    this._card.classList.remove(`${this._status}-card`);
+    this._status = status;
+    this._card.classList.add(`${this._status}-card`);
+  }
 
+  visitEdit() {
+    const newForm = new Form(this._card._id, ...args);
+  }
 
+}
 
-
-
-// class Modal {
-//   constructor() {
-//     this._modal = null;
-//     this._block = null;
-//   }
-//   initModal(width, html) {
-//     this._modal = document.createElement('div');
-//     this._modal.id = 'modal';
-//     this._modal.innerHTML = html
-//   };
-//   initBlock() {
-//     this._block = document.createElement('div');
-//     this._block.id = 'blockscreen';
-//     document.getElementsByClassName('body');
-//     const parent = document.getElementsByTagName('body')[0];
-//     const obj = parent.firstChild;
-//     parent.insertBefore(this._block, obj);
-//     this._block.addEventListener('click', this.close())
+// static ConvertData(data) {
 //
+// }
+
+// class VisitCardio extends Visit {
+//   constructor(bloodPressure, ...args) {
+//     super(...args);
 //   }
-//   close() {
-//     document.getElementById('blockscreen').style.display = 'none';
-//     document.getElementById('modal').style.display = 'none';
+//
+//   render(container) {
+//     super.render();
+//     const contentContainer = this._card.querySelector(".card-content");
+//     contentContainer.innerHTML = ``;
+//     container.append(this._card);
 //   }
-//   show() {
-//     this.initModal()
-//     this.initBlock();
+//
+//
+// }
+// const cardArr = [];
+// const form = new Form("", ...rest);
+// class Form {
+//   constructor(){
+//     this._id = (id) ? id : null;
 //   }
+//
+//   render() {
+//     this._form = document.createElement("form")
+//     this._form.innerHTML = `<input type="hidden" name="id" value="${(this._id) ? `id` : ``}">`;;
+//     this._form.addEventListener("submit", function() {
+//       const data = this.serialize();
+//       if(data.id) {
+//         // PUT запрос
+//         // const newVisit = new VisitCardio(Visit.convert(data));
+//         // запихиваешь его на его старое в массиве
+//       }
+//       else {
+//         // POST запрос -> {status: "Success", id: 3434}
+//         if(response.data.status === "Success") {
+//           newVisit = new VisitCardio(response.data.id, Visit.convert(data));
+//         }
+//       }
+//     })
+//
+//     serialize() {
+//       {
+//         name: value
+//       }
+//     }
+//
+//     serializeJSON() {
+//
+//     }
+//   }
+// }
+//
+// const cardio = new VisitCardio(bloodPressure, title, fio, description, status, priority);
+// [{
+//   doctor: "cardio",
+//   title: "gghfgfg",
+// }]
+//
+// const container = document.getElementById("card-list");
+// for(let i = 0; i < arr.length; i++) {
+//   if(arr[i].doctor === "Cardio") {
+//     const card = new VisitCardio(arr[i].title, arr[i].description);
+//     card.render(container);
+//     cardArr.push(card);
+//   }
+//
 // }
