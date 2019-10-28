@@ -43,12 +43,35 @@ class Modal {
 
 }
 
+class Select {
+  constructor(name, id, ...value) {
+    this._name = name;
+    this._id = id;
+    this._value = value;
+  }
+render(wrapper){
+  const select = document.createElement('select');
+  select.id = this._id;
+  select.setAttribute('name', this._name);
+  this._value.forEach((item, i) => {
+    // console.log(i);
+    const option = document.createElement('option');
+    option.setAttribute('value', item);
+    option.innerText = item;
+    select.append(option)
+  });
+
+  wrapper.appendChild(select)
+}
+}
+
+
 class Visit {
   constructor(data) {
     this._card = null;
     this._title = data.title;
-    this._name = patientName;
-    this._description = description;
+    this._name = data.name;
+    this._description = data.description;
     this._status = 'open';
     this._priority = priority;
   }
