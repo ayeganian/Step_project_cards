@@ -79,18 +79,42 @@ class Visit {
   }
 
   render(wrapper) {
-    this._card = document.createElement("div");
+  //   this._card = `<div class="card border-primary m-3" style="width: 300px;">
+  //   <div class="card-body bg-dark text-white text-center ">
+  //     <h3 class="card-title">${this._fullName}</h3>
+  //     <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon.png" alt="icon">${this._fullName}</h5>
+  //     <button class="show-more btn btn-success m-2">Показать больше.</button>
+  //     <button class="btn btn-primary m-2">Редактировать</button>
+  //   </div>
+  // </div>`;
 
-    const cardContent = document.createElement("div");
-    cardContent.className = "card-content";
+    this._card = document.createElement("div");
+    this._card.innerHTML = `<div class="card-body bg-dark text-white text-center ">
+       <h3 class="card-title">${this._fullName}</h3>
+       <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon.png" alt="icon">${this._fullName}</h5>
+       <div class="additional-info hidden"></div>
+       <button class="show-more btn btn-success m-2">Показать больше.</button>
+       <button class="update btn btn-primary m-2" onclick="openModal()">Редактировать</button>
+     </div>`
+    // this._card.className = 'card';
+    //
+    // const cardContent = document.createElement("div");
+    // cardContent.className = "card-body";
     wrapper.append(this._card);
-    this._card.append(cardContent);
-    this._card.addEventListener('click', (event) => {
-      // находим объект в массиве объектов и меняем ему статус
-      if (event.target.classList.contains("btn")) {
-        this.updateStatus(event.target.dataset.status);
-      }
-    })
+    // wrapper.append(this._card);
+    // this._card.append(cardContent);
+    // const cardTitle = document.createElement('h3');
+    // cardTitle.className = 'card-title';
+    // cardContent.append(cardTitle);
+    // cardTitle.innerText = this._fullName;
+
+    // this._card.addEventListener('click', (event) => {
+    //   // находим объект в массиве объектов и меняем ему статус
+    //   if (event.target.classList.contains("show-more")) {
+    //     this._card += `<p>${this._doctor}</p>`
+    //     // this.updateStatus(event.target.dataset.status);
+    //   }
+    // })
   }
 
   updateStatus(status) {
@@ -106,12 +130,53 @@ class Visit {
 }
 
 class VisitCardio extends Visit {
-  constructor(data) {
+  constructor(data, ...classArr) {
     super(data);
     this._doctor = data['cardio-select'];
     this._pressure = data['pressure'];
     this._weightIndex = data['weight-index'];
     this._diseases = data['diseases'];
+    this._age = data['age'];
+    this._class = classArr;
+  }
+render(wrapper) {
+  super.render(wrapper);
+  console.log(this._card);
+    const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
+  this._card.addEventListener('click', (event) => {
+  if (event.target.classList.contains("show-more")) {
+    const info = document.querySelector('.additional-info');
+    info.innerHTML = `<div>${this._doctor}</div>
+                      <div>${this._pressure}</div>
+                       <div>${this._weightIndex}</div>
+                       <div>${this._diseases}</div>
+                       <div>${this._age}</div>
+`
+  // this.updateStatus(event.target.dataset.status);
+  } else if (event.target.classList.contains("update")) {
+    console.log(modalVisitUpdate);
+    document.querySelector('.update').openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
+    // const updateData = document.querySelector('#card-update');
+    // const cardioForm = new CardioForm('POST', '','doctor-select-form');
+    // cardioForm.render(updateData);
+
+  }
+  })
+}
+
+}
+
+class VisitDentist extends Visit {
+  constructor(data) {
+    super(data);
+    this._doctor = data['dantist-select'];
+    this._date = data['date'];
+  }
+}
+class VisitTherapist extends Visit {
+  constructor(data) {
+    super(data);
+    this._doctor = data['therapist-select'];
     this._age = data['age'];
   }
 }
