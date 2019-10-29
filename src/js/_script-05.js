@@ -49,7 +49,7 @@ selectDoctor.addEventListener('change', function () {
     // }
     switch (doctor) {
       case 'Cardio':
-        const cardioForm = new CardioForm('POST', '','doctor-select-form');
+        const cardioForm = new CardioForm('POST', '','doctor-select-form', 'contact-form');
         cardioForm.render(document.getElementById('visit-modal'))
         break;
       case 'Dantist':

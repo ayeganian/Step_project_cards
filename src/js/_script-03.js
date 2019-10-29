@@ -64,21 +64,21 @@ class CardioForm extends Form {
     }
     render(container) {
         super.render(container);
-        const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose');
-        const description = new Input('text', 'Description', 'description');
-        const selectCardio = new Select('cardio-select', '', 'Ivanov', 'Petrov', 'Sidorov');
-        const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
-        const bloodPressure = new Input ('text', 'Pressure', 'pressure');
-        const weightIndex = new Input('number', 'Index', 'weight-index');
-        const diseases = new Input('','Diseases', 'diseases');
-        const age = new Input('number','Age', 'age');
-        const fullName = new Input('','Full name', 'full-name');
+        const visitPurpose = new Input('text', 'Enter purpose of visit', 'visit-purpose', '', '', 'form-control', 'my-2');
+        const description = new Input('text', 'Description', 'description', '', '', 'form-control', 'my-2');
+        const selectCardio = new Select('cardio-select', '', 'Ivanov', 'Petrov', 'Sidorov', 'form-control', 'my-2');
+        const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High', '', '', 'form-control', 'my-2');
+        const bloodPressure = new Input ('text', 'Pressure', 'pressure', '', '', 'form-control', 'my-2');
+        const weightIndex = new Input('number', 'Index', 'weight-index', '', '', 'form-control', 'my-2');
+        const diseases = new Input('','Diseases', 'diseases', '', '', 'form-control', 'my-2');
+        const age = new Input('number','Age', 'age', '', '', 'form-control', 'my-2');
+        const fullName = new Input('','Full name', 'full-name', '', '', 'form-control', 'my-2');
 
         // const titleCard = new Input('text', 'title', 'title');
         // const patientName = new Input('text', 'patient name', 'name');
         // const status = new Input('text', 'Status', 'status');
         // const priority = new Input('text', 'Priority', 'priority');
-        const cardSubmit = new Input('submit', '', '', 'Отправить');
+        const cardSubmit = new Input('submit', '', '', 'Отправить', '', 'btn', 'btn-primary');
 
         visitPurpose.render(this._form);
         description.render(this._form);
