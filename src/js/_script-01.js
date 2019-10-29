@@ -69,11 +69,13 @@ render(wrapper){
 class Visit {
   constructor(data) {
     this._card = null;
-    this._title = data.title;
-    this._name = data.name;
+    this._visit = data['visit-purpose'];
     this._description = data.description;
-    this._status = 'open';
-    this._priority = priority;
+    this._priority = data['priority-select'];
+    this._fullName = data['full-name'];
+    // this._title = data.title;
+    // this._name = data.name;
+    // this._status = 'open';
   }
 
   render(wrapper) {
@@ -102,6 +104,19 @@ class Visit {
   }
 
 }
+
+class VisitCardio extends Visit {
+  constructor(data) {
+    super(data);
+    this._doctor = data['cardio-select'];
+    this._pressure = data['pressure'];
+    this._weightIndex = data['weight-index'];
+    this._diseases = data['diseases'];
+    this._age = data['age'];
+  }
+}
+
+// const visitTest = new Visit(data)
 
 // static ConvertData(data) {
 //
