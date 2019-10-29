@@ -5,7 +5,14 @@ class Form {
         this._classArr = classArr;
         this._form = null;
     }
-
+    // setType(newAction) {
+    //     const actions = ['POST', 'GET', 'DELETE', 'PULL'];
+    //     if (actions.includes(newAction)) {
+    //         this._action = newAction;
+    //     } else {
+    //         return false;
+    //     }
+    // };
     render(container) {
         this._form = document.createElement("form");
         this._form.id = this._id;
@@ -13,38 +20,50 @@ class Form {
         this._form.action = this._action;
         this._form.addEventListener("submit", (e) => {
             e.preventDefault();
+        // debugger
 
             const data =  this.serialize();
-            console.log(data);
-
-                this._form.closest(".modal-overlay").classList.add('is-hidden');
-            // if (e.target.id === 'visit-modal') {
-            //     let test = document.getElementById('select-doctors');
-            //     // console.log(test);
-            //     // console.log(e.target.id);
-            //     const visit = new Visit(data);
-            //     // console.log(visit);
-            // visit.render(document.querySelector('.cards-desk'))
-            //
-            // }
+            const selectedDoctor = this._form.previousElementSibling.value;
 
             // const visit = new Visit("fggh", 'efgg', 'adf', 'eggrg', 'wegw');
+            // debugger;
             // console.log(data);
+
+
             // console.log(this.serialize(visit));
+            if (e.target.className.includes('doctor-select-form')) {
+                if (selectedDoctor === 'Cardio') {
+                const visitCardio = new VisitCardio(data);
+                visitCardio.render(document.querySelector('.cards-desk'))
+                }
+                // console.log(visit);
+                // console.log(data);
+                // console.log(visit);
+            }
+                this._form.closest(".modal-overlay").classList.add('is-hidden');
         });
+        // this._form.addEventListener('click', ev => {
+        //     if (ev.currentTarget.id === 'id-cardio') {
+        //         const visit = new Visit(data);
+        //         console.log(ev.currentTarget);
+        //         // console.log(data);
+        //         // console.log(visit);
+        //     }
+        // });
 
             container.appendChild(this._form);
     }
     serialize() {
-        const inputs = this._form.querySelectorAll("input:not([type='submit'])");
+        const inputs = this._form.querySelectorAll("input:not([type='submit']), select ");
+        // const inputs = this._form.querySelectorAll("input:not([type='submit'])", "option[value]");
         const arr = [...inputs].filter(item => item.value);
-        // console.log(arr);
         const obj = {};
         arr.forEach(input => {
             obj[input.name] = input.value;
             });
         return obj;
     }
+
 }
 
 class CardioForm extends Form {
@@ -53,16 +72,16 @@ class CardioForm extends Form {
     }
     render(container) {
         super.render(container);
-        const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose');
-        const description = new Input('text', 'Description', 'description');
-        const selectCardio = new Select('cardio-select', '', '-select doctors=', 'Ivanov', 'Petrov', 'Sidorov');
-        const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
-        const bloodPressure = new Input ('text', 'Pressure', 'pressure');
-        const weightIndex = new Input('number', 'Index', 'weight-index');
-        const diseases = new Input('','Diseases', 'diseases');
-        const age = new Input('number','Age', 'age');
-        const fullName = new Input('','Full name', 'full-name');
-        const cardSubmit = new Input('submit', '', '', 'Отправить');
+        const visitPurpose = new Input('text', 'Enter purpose of visit', 'visit-purpose', '', '', '', 'form-control', 'my-2');
+        const description = new Input('text', 'Description', 'description', '', '', '', 'form-control', 'my-2');
+        const selectCardio = new Select('cardio-select', '', 'Ivanov', 'Petrov', 'Sidorov');
+        const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High', '', '', 'form-control', 'my-2');
+        const bloodPressure = new Input ('text', 'Pressure', 'pressure', '', '', '', 'form-control', 'my-2');
+        const weightIndex = new Input('number', 'Index', 'weight-index', '', '', '', 'form-control', 'my-2');
+        const diseases = new Input('','Diseases', 'diseases', '', '', '', 'form-control', 'my-2');
+        const age = new Input('number','Age', 'age', '', '', '', 'form-control', 'my-2');
+        const fullName = new Input('','Full name', 'full-name', '', '', '', 'form-control', 'my-2');
+        const cardSubmit = new Input('submit','',  '', 'Отправить', 'id-cardio', '', 'btn', 'btn-primary');
 
         visitPurpose.render(this._form);
         description.render(this._form);
@@ -73,6 +92,11 @@ class CardioForm extends Form {
         diseases.render(this._form);
         age.render(this._form);
         fullName.render(this._form);
+
+        // titleCard.render(this._form);
+        // patientName.render(this._form);
+        // status.render(this._form);
+        // priority.render(this._form);
         cardSubmit.render(this._form);
     }
 }
@@ -85,7 +109,7 @@ class DantistForm extends Form {
         super.render(container);
         const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose');
         const description = new Input('text', 'Description', 'description');
-        const selectDantist = new Select('dantist-select', '','-select doctors=', 'Kurochkin', 'Ytkin', 'Petuh');
+        const selectDantist = new Select('dantist-select', '', 'Kurochkin', 'Ytkin', 'Petuh');
         const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
         const date = new Input('date', 'date', 'date');
         const fullName = new Input('','Full name', 'full-name');
@@ -109,7 +133,7 @@ class TherapistForm extends Form {
         super.render(container);
         const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose');
         const description = new Input('', 'Description', 'description');
-        const selectTherapist = new Select('therapist-select', '','-select doctors=', 'Monatik', 'Maruv', 'Loboda');
+        const selectTherapist = new Select('therapist-select', '', 'Monatik', 'Maruv', 'Loboda');
         const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
         const age = new Input('number','Age', 'age');
         const fullName = new Input('','Full name', 'full-name');
