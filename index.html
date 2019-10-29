@@ -17,21 +17,32 @@
 
 <div class="med-page">
 
+<div class="is-hidden modal-overlay" id="two">
+  <div class="modal">
+    <span class="button-close">xx</span>
+    <form action="" id="form2">
+    </form>
+  </div>
+</div>
+
+
+
+
+
   <header>
     <nav class="navbar   text-white ">
       <a href="#" class="navbar-brand">
         <img class="logo-img" src="/img/medical-logo-png-5.png" alt="logo">
         <span class="text-white text-uppercase font-weight-bold font-italic">Medical site</span>
       </a>
-      <button class="btn btn-outline-success bg-dark text-uppercase font-weight-bold font-italic my-2 my-sm-0"
-              onclick="openModal()">Open Modal
+      <button class="btn btn-outline-success bg-dark text-uppercase font-weight-bold font-italic my-2 my-sm-0 login-btn"
+              onclick="openModal()" type="submit">Login
       </button>
-      <div class="is-hidden modal-overlay">
-        <div class="modal">
-          <span class="button-close">×</span>
-        </div>
+          <div class="is-hidden modal-overlay login-wrapper" id="login-modal">
+            <div class="modal" id="modal">
+              <span class="button-close">×</span>
+            </div>
       </div>
-
     </nav>
   </header>
 
@@ -45,14 +56,21 @@
 
   </section>
 
-  <section id="desk-section ">
-
+  <section id="desk-section">
     <div class="cards-desk container m-5 border mx-auto">
+      <div class="is-hidden modal-overlay" id="add-card-modal">
+        <div class="modal" id="card-modal">
+          <span class="button-close">×</span>
+        </div>
+      </div>
+
       <!--     div with cards-->
       <div class="d-flex flex-wrap justify-content-start align-items-center p-5">
 
+        <button class="btn btn-outline-success my-2 my-sm-0 add-card-btn" onclick="openModal()" type="submit">+</button>
+
         <!--bootstrap card-->
-        <div class="card border-primary m-3" style="width: 15vw;">
+<!--        <div class="card border-primary m-3" style="width: 15vw;">
           <div class="card-body bg-dark text-white text-center ">
            <h3 class="card-title">ФИО</h3>
             <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon.png" alt="icon">Врач, к которому человек
@@ -60,10 +78,10 @@
             <a href="#" class="btn btn-success m-2">Показать больше.</a>
             <a href="#" class="btn btn-primary m-2">Редактировать</a>
           </div>
-        </div>
+        </div>-->
 
         <!--bootstrap card-->
-        <div class="card border-primary m-3" style="width: 15vw;">
+<!--        <div class="card border-primary m-3" style="width: 15vw;">
           <div class="card-body bg-dark text-white text-center ">
             <h3 class="card-title">ФИО</h3>
             <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon2.png" alt="icon">Врач, к которому человек
@@ -71,10 +89,10 @@
             <a href="#" class="btn btn-success m-2">Показать больше.</a>
             <a href="#" class="btn btn-primary m-2">Редактировать</a>
           </div>
-        </div>
+        </div>-->
 
         <!--bootstrap card-->
-        <div class="card border-primary m-3" style="width: 15vw;">
+<!--        <div class="card border-primary m-3" style="width: 15vw;">
           <div class="card-body bg-dark text-white text-center ">
             <h3 class="card-title">ФИО</h3>
             <h5 class="card-title"><img class="card-logo rounded-circle mr-2" src="/img/icon3.png" alt="icon">Врач, к
@@ -82,7 +100,7 @@
             <a href="#" class="btn btn-success m-2">Показать больше.</a>
             <a href="#" class="btn btn-primary m-2">Редактировать</a>
           </div>
-        </div>
+        </div>-->
 
       </div>
     </div>
@@ -269,6 +287,10 @@
   </footer>
 
 </div>
+
+<!--axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
