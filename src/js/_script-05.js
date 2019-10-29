@@ -5,7 +5,7 @@ document.querySelector('.login-btn').openModal = modal.open.bind(modal);
 const loginForm = new Form('GET', 'login-form', 'login-wrapper');
 loginForm.render(document.getElementById('modal'));
 
-const emailInput = new Input('email', 'Enter your email', 'mail' ,'', '', 'annettt@gmail.com');
+const emailInput = new Input('email', 'Enter your email', 'email' ,'', '', 'annettt@gmail.com');
 emailInput.render(document.getElementById('login-form'));
 
 const passwordInput = new Input('password', 'Enter your password', 'password' ,'123456');

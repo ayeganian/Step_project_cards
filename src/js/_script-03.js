@@ -20,9 +20,12 @@ class Form {
         this._form.action = this._action;
         this._form.addEventListener("submit", (e) => {
             e.preventDefault();
-        // debugger
 
             const data =  this.serialize();
+
+            if (this._form.id === 'login-form') {
+                this.requestLogin(data);
+            }
             const selectedDoctor = this._form.previousElementSibling.value;
 
             // const visit = new Visit("fggh", 'efgg', 'adf', 'eggrg', 'wegw');
@@ -62,6 +65,35 @@ class Form {
             obj[input.name] = input.value;
             });
         return obj;
+    }
+
+    requestLogin(data) {
+        const authOptions = {
+            method: 'POST',
+            url: 'http://cards.danit.com.ua/login',
+            data: JSON.stringify(data),
+        };
+        axios(authOptions)
+            .then(function(response) {
+                if (response.data.status !== 'Success') {
+                    const errorLogin = document.createElement('p');
+                    document.querySelector('#login-form').insertAdjacentElement('beforeend', errorLogin);
+                    return errorLogin.textContent = 'Неправильно введен логин или пароль';
+                    console.log('Неправильно введен логин или пароль');
+                } else {
+                    const loginButton = document.querySelector('.login-btn');
+                    loginButton.innerText = '+ Создать';
+                    console.log('Правильно введен логин или пароль');
+                }
+
+                console.log(response);
+                console.log(response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+
+        axios.post("/login", data).then(response => console.log(response));
     }
 
 }
