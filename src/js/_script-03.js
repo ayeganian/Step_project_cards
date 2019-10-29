@@ -35,12 +35,11 @@ class Form {
             //
             // }
 
-
             // const visit = new Visit("fggh", 'efgg', 'adf', 'eggrg', 'wegw');
             // debugger;
             // console.log(data);
             // console.log(this.serialize(visit));
-        })
+        });
 
             container.appendChild(this._form);
     }
@@ -54,8 +53,6 @@ class Form {
             });
         return obj;
     }
-
-
 }
 
 class CardioForm extends Form {
@@ -64,6 +61,16 @@ class CardioForm extends Form {
     }
     render(container) {
         super.render(container);
+        const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose');
+        const description = new Input('text', 'Description', 'description');
+        const selectCardio = new Select('cardio-select', '', '-select doctors=', 'Ivanov', 'Petrov', 'Sidorov');
+        const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
+        const bloodPressure = new Input ('text', 'Pressure', 'pressure');
+        const weightIndex = new Input('number', 'Index', 'weight-index');
+        const diseases = new Input('','Diseases', 'diseases');
+        const age = new Input('number','Age', 'age');
+        const fullName = new Input('','Full name', 'full-name');
+        const cardSubmit = new Input('submit', '', '', 'Отправить');
         const visitPurpose = new Input('text', 'Enter purpose of visit', 'visit-purpose', '', '', 'form-control', 'my-2');
         const description = new Input('text', 'Description', 'description', '', '', 'form-control', 'my-2');
         const selectCardio = new Select('cardio-select', '', 'Ivanov', 'Petrov', 'Sidorov', 'form-control', 'my-2');
@@ -95,10 +102,53 @@ class CardioForm extends Form {
         // status.render(this._form);
         // priority.render(this._form);
         cardSubmit.render(this._form);
-
-
     }
 }
-// const testForm = new Form('GET', 'testik');
-// const form1 = document.getElementById('test-form');
-// testForm.render(form1);
+
+class DantistForm extends Form {
+    constructor (...args) {
+        super(...args);
+    }
+    render(container) {
+        super.render(container);
+        const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose');
+        const description = new Input('text', 'Description', 'description');
+        const selectDantist = new Select('dantist-select', '','-select doctors=', 'Kurochkin', 'Ytkin', 'Petuh');
+        const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
+        const date = new Input('date', 'date', 'date');
+        const fullName = new Input('','Full name', 'full-name');
+        const cardSubmit = new Input('submit', '', '', 'Отправить');
+
+        visitPurpose.render(this._form);
+        description.render(this._form);
+        selectDantist.render(this._form);
+        selectPriority.render(this._form);
+        date.render(this._form);
+        fullName.render(this._form);
+        cardSubmit.render(this._form);
+    }
+}
+
+class TherapistForm extends Form {
+    constructor (...args) {
+        super(...args);
+    }
+    render(container) {
+        super.render(container);
+        const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose');
+        const description = new Input('', 'Description', 'description');
+        const selectTherapist = new Select('therapist-select', '','-select doctors=', 'Monatik', 'Maruv', 'Loboda');
+        const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
+        const age = new Input('number','Age', 'age');
+        const fullName = new Input('','Full name', 'full-name');
+        const cardSubmit = new Input('submit', '', '', 'Отправить');
+
+        visitPurpose.render(this._form);
+        description.render(this._form);
+        selectTherapist.render(this._form);
+        selectPriority.render(this._form);
+        age.render(this._form);
+        fullName.render(this._form);
+        cardSubmit.render(this._form);
+    }
+}
