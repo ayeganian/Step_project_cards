@@ -24,8 +24,12 @@ class Form {
             const data =  this.serialize();
 
             if (this._form.id === 'login-form') {
-                this.requestLogin(data);
+                this._requestLogin(data);
             }
+            // if (e.currentTarget.classList.contains('doctor-select-form')) {
+            //     this.requestCards(data);
+            // }
+
             const selectedDoctor = this._form.previousElementSibling.value;
 
             // const visit = new Visit("fggh", 'efgg', 'adf', 'eggrg', 'wegw');
@@ -37,7 +41,9 @@ class Form {
             if (e.target.className.includes('doctor-select-form')) {
                 if (selectedDoctor === 'Cardio') {
                 const visitCardio = new VisitCardio(data);
-                visitCardio.render(document.querySelector('.cards-desk'))
+                visitCardio.render(document.querySelector('.cards-desk'));
+
+                this._requestCards(data);
                 }
                 // console.log(visit);
                 // console.log(data);
@@ -67,7 +73,7 @@ class Form {
         return obj;
     }
 
-    requestLogin(data) {
+    _requestLogin(data) {
         const authOptions = {
             method: 'POST',
             url: 'http://cards.danit.com.ua/login',
@@ -78,12 +84,10 @@ class Form {
                 if (response.data.status !== 'Success') {
                     const errorLogin = document.createElement('p');
                     document.querySelector('#login-form').insertAdjacentElement('beforeend', errorLogin);
-                    return errorLogin.textContent = 'Неправильно введен логин или пароль';
-                    console.log('Неправильно введен логин или пароль');
+                    errorLogin.textContent = 'Неправильно введен логин или пароль';
                 } else {
                     const loginButton = document.querySelector('.login-btn');
                     loginButton.innerText = '+ Создать';
-                    console.log('Правильно введен логин или пароль');
                 }
 
                 console.log(response);
@@ -94,6 +98,35 @@ class Form {
             });
 
         axios.post("/login", data).then(response => console.log(response));
+    }
+
+    _requestCards(data) {
+        const token = '8eca04c25c57';
+        const authOptions = {
+            method: 'POST',
+            url: 'http://cards.danit.com.ua/cards',
+            data: JSON.stringify(data),
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        };
+
+        axios(authOptions)
+            .then(function(response) {
+                if (response.data.status !== 'Success') {
+                    console.log('Карточка не добавлена');
+                } else {
+                    console.log('Карточка добавлена');
+                }
+
+                console.log(response);
+                console.log(response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+
+        axios.post("/cards", data).then(response => console.log(response));
     }
 
 }
