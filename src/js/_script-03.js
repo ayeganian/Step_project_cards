@@ -86,14 +86,17 @@ class Form {
                     console.log('Правильно введен логин или пароль');
                 }
 
-                console.log(response);
-                console.log(response.data);
+                 // console.log(response);
+                const objectOfLogin = response.data.token;
+                console.log(objectOfLogin);
+                // return objectOfLogin
             })
             .catch(function(error) {
                 console.log(error);
             });
 
-        axios.post("/login", data).then(response => console.log(response));
+        // console.log(data);
+        // axios.post("/login", data).then(response => console.log(response));
     }
 
 }

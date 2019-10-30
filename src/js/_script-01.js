@@ -19,8 +19,6 @@
 //        axios.post("/login", data).then(response => console.log(response))
 
 
-
-
 class Modal {
   constructor(overlay) {
     this.overlay = overlay;
@@ -33,9 +31,11 @@ class Modal {
       }
     });
   }
+
   close() {
     this.overlay.classList.add('is-hidden');
   }
+
   open() {
     this.overlay.classList.remove('is-hidden');
   }
@@ -49,20 +49,21 @@ class Select {
     this._id = id;
     this._value = value;
   }
-render(wrapper){
-  const select = document.createElement('select');
-  select.id = this._id;
-  select.setAttribute('name', this._name);
-  this._value.forEach((item, i) => {
-    // console.log(i);
-    const option = document.createElement('option');
-    option.setAttribute('value', item);
-    option.innerText = item;
-    select.append(option)
-  });
 
-  wrapper.appendChild(select)
-}
+  render(wrapper) {
+    const select = document.createElement('select');
+    select.id = this._id;
+    select.setAttribute('name', this._name);
+    this._value.forEach((item, i) => {
+      // console.log(i);
+      const option = document.createElement('option');
+      option.setAttribute('value', item);
+      option.innerText = item;
+      select.append(option)
+    });
+
+    wrapper.appendChild(select)
+  }
 }
 
 
@@ -79,23 +80,27 @@ class Visit {
   }
 
   render(wrapper) {
-  //   this._card = `<div class="card border-primary m-3" style="width: 300px;">
-  //   <div class="card-body bg-dark text-white text-center ">
-  //     <h3 class="card-title">${this._fullName}</h3>
-  //     <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon.png" alt="icon">${this._fullName}</h5>
-  //     <button class="show-more btn btn-success m-2">Показать больше.</button>
-  //     <button class="btn btn-primary m-2">Редактировать</button>
-  //   </div>
-  // </div>`;
+    //   this._card = `<div class="card border-primary m-3" style="width: 300px;">
+    //   <div class="card-body bg-dark text-white text-center ">
+    //     <h3 class="card-title">${this._fullName}</h3>
+    //     <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon.png" alt="icon">${this._fullName}</h5>
+    //     <button class="show-more btn btn-success m-2">Показать больше.</button>
+    //     <button class="btn btn-primary m-2">Редактировать</button>
+    //   </div>
+    // </div>`;
 
     this._card = document.createElement("div");
-    this._card.innerHTML = `<div class="card-body bg-dark text-white text-center ">
+    this._card.classList.add("drag-card" ,"medical-card","card", "border-primary", "m-3");
+    // this._card.createAttribute('draggable', 'true');
+    //нужно добавить уникальный айди карты
+    // this._card.id = ;
+    this._card.innerHTML = `<div class="card-body bg-dark text-white text-center">
        <h3 class="card-title">${this._fullName}</h3>
        <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon.png" alt="icon">${this._fullName}</h5>
        <div class="additional-info hidden"></div>
        <button class="show-more btn btn-success m-2">Показать больше.</button>
        <button class="update btn btn-primary m-2" onclick="openModal()">Редактировать</button>
-     </div>`
+     </div>`;
     // this._card.className = 'card';
     //
     // const cardContent = document.createElement("div");
@@ -132,37 +137,65 @@ class Visit {
 class VisitCardio extends Visit {
   constructor(data, ...classArr) {
     super(data);
+
     this._doctor = data['cardio-select'];
     this._pressure = data['pressure'];
     this._weightIndex = data['weight-index'];
     this._diseases = data['diseases'];
     this._age = data['age'];
     this._class = classArr;
+
+
+
+  //   const  formData = {
+  //     doctor: this._doctor,
+  //     title: this._visit,
+  //     description: this._description,
+  //     status: this._status,
+  //     priority: this._priority,
+  //     content: {
+  //       bp: "24",
+  //       age: this._age,
+  //       weight: 70
+  //     }
+  //
+  // }
+  //
+  //   axios.post('http://cards.danit.com.ua/cards', formData, {
+  //     headers: { Authorization: `Bearer 8eca04c25c57` }
+  //   })
+  //       .then((response) => {
+  //         console.log(response);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
   }
-render(wrapper) {
-  super.render(wrapper);
-  console.log(this._card);
+
+  render(wrapper) {
+    super.render(wrapper);
+    console.log(this._card);
     const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
-  this._card.addEventListener('click', (event) => {
-  if (event.target.classList.contains("show-more")) {
-    const info = document.querySelector('.additional-info');
-    info.innerHTML = `<div>${this._doctor}</div>
+    this._card.addEventListener('click', (event) => {
+      if (event.target.classList.contains("show-more")) {
+        const info = document.querySelector('.additional-info');
+        info.innerHTML = `<div>${this._doctor}</div>
                       <div>${this._pressure}</div>
                        <div>${this._weightIndex}</div>
                        <div>${this._diseases}</div>
                        <div>${this._age}</div>
 `
-  // this.updateStatus(event.target.dataset.status);
-  } else if (event.target.classList.contains("update")) {
-    console.log(modalVisitUpdate);
-    document.querySelector('.update').openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
-    // const updateData = document.querySelector('#card-update');
-    // const cardioForm = new CardioForm('POST', '','doctor-select-form');
-    // cardioForm.render(updateData);
+        // this.updateStatus(event.target.dataset.status);
+      } else if (event.target.classList.contains("update")) {
+        console.log(modalVisitUpdate);
+        document.querySelector('.update').openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
+        // const updateData = document.querySelector('#card-update');
+        // const cardioForm = new CardioForm('POST', '','doctor-select-form');
+        // cardioForm.render(updateData);
 
+      }
+    })
   }
-  })
-}
 
 }
 
@@ -173,6 +206,7 @@ class VisitDentist extends Visit {
     this._date = data['date'];
   }
 }
+
 class VisitTherapist extends Visit {
   constructor(data) {
     super(data);

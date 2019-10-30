@@ -17,13 +17,13 @@
 
 <div class="med-page">
 
-<!--  <div class="is-hidden modal-overlay" id="two">-->
-<!--    <div class="modal">-->
-<!--      <span class="button-close">xx</span>-->
-<!--      <form action="" id="form2">-->
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->
+  <!--  <div class="is-hidden modal-overlay" id="two">-->
+  <!--    <div class="modal">-->
+  <!--      <span class="button-close">xx</span>-->
+  <!--      <form action="" id="form2">-->
+  <!--      </form>-->
+  <!--    </div>-->
+  <!--  </div>-->
 
 
   <header>
@@ -56,31 +56,28 @@
   </section>
 
   <section id="desk-section">
-    <div class="cards-desk container m-5 border mx-auto">
+    <div id="container" class="cards-desk container m-5 border mx-auto d-flex flex-wrap justify-content-start align-items-center p-5">
       <div class="is-hidden modal-overlay" id="add-card-modal">
         <div class="modal" id="card-modal">
           <span class="button-close">×</span>
         </div>
       </div>
 
-     ​
+      ​
       <div class="is-hidden modal-overlay" id="update-card-modal">
         <div class="modal" id="card-update">
-          <span class="button-close">×</span>
-          ​
-          ​
+          <span class="button-close">×</span>​
         </div>
       </div>
 
 
-
       <!--     div with cards-->
-      <div class="d-flex flex-wrap justify-content-start align-items-center p-5">
+      <div   class="items">
 
         <button class="btn btn-outline-success my-2 my-sm-0 add-card-btn" onclick="openModal()" type="submit">+</button>
 
-        <!--bootstrap card-->
-        <!--        <div class="card border-primary m-3" style="width: 15vw;">
+<!--        &lt;!&ndash;bootstrap card&ndash;&gt;
+               <div id="1" class="drag-card card border-primary m-3" style="width: 15vw;" draggable="true" >
                   <div class="card-body bg-dark text-white text-center ">
                    <h3 class="card-title">ФИО</h3>
                     <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon.png" alt="icon">Врач, к которому человек
@@ -88,10 +85,10 @@
                     <a href="#" class="btn btn-success m-2">Показать больше.</a>
                     <a href="#" class="btn btn-primary m-2">Редактировать</a>
                   </div>
-                </div>-->
+                </div>
 
-        <!--bootstrap card-->
-        <!--        <div class="card border-primary m-3" style="width: 15vw;">
+        &lt;!&ndash;bootstrap card&ndash;&gt;
+               <div id="2" class="drag-card card border-primary m-3" style="width: 15vw;" draggable="true" >
                   <div class="card-body bg-dark text-white text-center ">
                     <h3 class="card-title">ФИО</h3>
                     <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon2.png" alt="icon">Врач, к которому человек
@@ -99,10 +96,10 @@
                     <a href="#" class="btn btn-success m-2">Показать больше.</a>
                     <a href="#" class="btn btn-primary m-2">Редактировать</a>
                   </div>
-                </div>-->
+                </div>
 
-        <!--bootstrap card-->
-        <!--        <div class="card border-primary m-3" style="width: 15vw;">
+        &lt;!&ndash;bootstrap card&ndash;&gt;
+        <div id="3" class="drag-card card border-primary m-3" style="width: 15vw;" draggable="true" >
                   <div class="card-body bg-dark text-white text-center ">
                     <h3 class="card-title">ФИО</h3>
                     <h5 class="card-title"><img class="card-logo rounded-circle mr-2" src="/img/icon3.png" alt="icon">Врач, к
@@ -293,7 +290,7 @@
 
   </section>
   <footer class="footer page-footer font-small ">
-    <div class="footer-copyright text-center  text-white  py-3">© 2018 Copyright:
+    <div class="footer-copyright text-center  text-white  py-3">© 2019 Copyright:
       <a href="#"> MedicalSite.com</a>
     </div>
   </footer>
