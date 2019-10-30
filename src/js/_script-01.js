@@ -24,7 +24,7 @@ axios(authOptions)
 class Modal {
   constructor(overlay) {
     this.overlay = overlay;
-    const closeButton = overlay.querySelector('.button-close')
+    const closeButton = overlay.querySelector('.button-close');
     closeButton.addEventListener('click', this.close.bind(this));
     overlay.addEventListener('click', e => {
       // if (e.srcElement.id === this.overlay.id) {
