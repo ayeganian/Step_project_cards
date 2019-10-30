@@ -1,20 +1,20 @@
-const data = {
-  email: "annettt@gmail.com",
-  password: "123456"
-};
-const authOptions = {
-  method: 'POST',
-  url: 'http://cards.danit.com.ua/login',
-  data: JSON.stringify(data),
-};
-
-axios(authOptions)
-  .then(function(response) {
-    console.log(response.data);
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
+// const data = {
+//   email: "annettt@gmail.com",
+//   password: "123456"
+// };
+// const authOptions = {
+//   method: 'POST',
+//   url: 'http://cards.danit.com.ua/login',
+//   data: JSON.stringify(data),
+// };
+//
+// axios(authOptions)
+//   .then(function(response) {
+//     console.log(response.data);
+//   })
+//   .catch(function(error) {
+//     console.log(error);
+//   });
 
 //        axios.post("/login", data).then(response => console.log(response))
 
