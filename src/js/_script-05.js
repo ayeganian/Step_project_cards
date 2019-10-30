@@ -53,4 +53,9 @@ selectDoctor.addEventListener('change', function () {
   // }
 });
 
+const visitArr = [];
+
+
+
+
 
