@@ -5,7 +5,7 @@
   <!--  <meta name="viewport" content="width=device-width, initial-scale=1">-->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Online shop</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
   <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <!--  <link rel="stylesheet" type="text/css"-->
@@ -17,16 +17,13 @@
 
 <div class="med-page">
 
-<div class="is-hidden modal-overlay" id="two">
-  <div class="modal">
-    <span class="button-close">xx</span>
-    <form action="" id="form2">
-    </form>
-  </div>
-</div>
-
-
-
+<!--  <div class="is-hidden modal-overlay" id="two">-->
+<!--    <div class="modal">-->
+<!--      <span class="button-close">xx</span>-->
+<!--      <form action="" id="form2">-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
 
 
   <header>
@@ -38,12 +35,14 @@
       <button class="btn btn-outline-success bg-dark text-uppercase font-weight-bold font-italic my-2 my-sm-0 login-btn"
               onclick="openModal()" type="submit">Login
       </button>
-          <div class="is-hidden modal-overlay login-wrapper" id="login-modal">
-            <div class="modal" id="modal">
-              <span class="button-close">×</span>
-            </div>
-      </div>
+
     </nav>
+    <div class="is-hidden modal-overlay login-wrapper" id="login-modal">
+      <div class="modal" id="modal">
+        <span class="button-close">×</span>
+      </div>
+    </div>
+
   </header>
 
   <section id="form-section">
@@ -64,43 +63,54 @@
         </div>
       </div>
 
+     ​
+      <div class="is-hidden modal-overlay" id="update-card-modal">
+        <div class="modal" id="card-update">
+          <span class="button-close">×</span>
+          ​
+          ​
+        </div>
+      </div>
+
+
+
       <!--     div with cards-->
       <div class="d-flex flex-wrap justify-content-start align-items-center p-5">
 
         <button class="btn btn-outline-success my-2 my-sm-0 add-card-btn" onclick="openModal()" type="submit">+</button>
 
         <!--bootstrap card-->
-<!--        <div class="card border-primary m-3" style="width: 15vw;">
-          <div class="card-body bg-dark text-white text-center ">
-           <h3 class="card-title">ФИО</h3>
-            <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon.png" alt="icon">Врач, к которому человек
-              записан на прием.</h5>
-            <a href="#" class="btn btn-success m-2">Показать больше.</a>
-            <a href="#" class="btn btn-primary m-2">Редактировать</a>
-          </div>
-        </div>-->
+        <!--        <div class="card border-primary m-3" style="width: 15vw;">
+                  <div class="card-body bg-dark text-white text-center ">
+                   <h3 class="card-title">ФИО</h3>
+                    <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon.png" alt="icon">Врач, к которому человек
+                      записан на прием.</h5>
+                    <a href="#" class="btn btn-success m-2">Показать больше.</a>
+                    <a href="#" class="btn btn-primary m-2">Редактировать</a>
+                  </div>
+                </div>-->
 
         <!--bootstrap card-->
-<!--        <div class="card border-primary m-3" style="width: 15vw;">
-          <div class="card-body bg-dark text-white text-center ">
-            <h3 class="card-title">ФИО</h3>
-            <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon2.png" alt="icon">Врач, к которому человек
-              записан на прием.</h5>
-            <a href="#" class="btn btn-success m-2">Показать больше.</a>
-            <a href="#" class="btn btn-primary m-2">Редактировать</a>
-          </div>
-        </div>-->
+        <!--        <div class="card border-primary m-3" style="width: 15vw;">
+                  <div class="card-body bg-dark text-white text-center ">
+                    <h3 class="card-title">ФИО</h3>
+                    <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon2.png" alt="icon">Врач, к которому человек
+                      записан на прием.</h5>
+                    <a href="#" class="btn btn-success m-2">Показать больше.</a>
+                    <a href="#" class="btn btn-primary m-2">Редактировать</a>
+                  </div>
+                </div>-->
 
         <!--bootstrap card-->
-<!--        <div class="card border-primary m-3" style="width: 15vw;">
-          <div class="card-body bg-dark text-white text-center ">
-            <h3 class="card-title">ФИО</h3>
-            <h5 class="card-title"><img class="card-logo rounded-circle mr-2" src="/img/icon3.png" alt="icon">Врач, к
-              которому человек записан на прием.</h5>
-            <a href="#" class="btn btn-success m-2">Показать больше.</a>
-            <a href="#" class="btn btn-primary m-2">Редактировать</a>
-          </div>
-        </div>-->
+        <!--        <div class="card border-primary m-3" style="width: 15vw;">
+                  <div class="card-body bg-dark text-white text-center ">
+                    <h3 class="card-title">ФИО</h3>
+                    <h5 class="card-title"><img class="card-logo rounded-circle mr-2" src="/img/icon3.png" alt="icon">Врач, к
+                      которому человек записан на прием.</h5>
+                    <a href="#" class="btn btn-success m-2">Показать больше.</a>
+                    <a href="#" class="btn btn-primary m-2">Редактировать</a>
+                  </div>
+                </div>-->
 
       </div>
     </div>
@@ -138,7 +148,9 @@
               <div class="d-flex">
                 <div class="align-self-center pl-3">
                   <h3>Ivanov Ivan Ivanovich</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur beatae commodi earum eos exercitationem facere illo iste, iure maxime nam odio pariatur qui repellendus repudiandae saepe sint tempore vel voluptas.</p>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur beatae commodi earum eos
+                    exercitationem facere illo iste, iure maxime nam odio pariatur qui repellendus repudiandae saepe
+                    sint tempore vel voluptas.</p>
                   <img class="diploma img-fluid ml-2" src="/img/sertificat-7.jpg" alt="sertificate">
                   <img class="diploma img-fluid " src="/img/sertificat_zabavu_darii_gennadievnu_8.jpg"
                        alt="sertificate">
@@ -182,104 +194,104 @@
     </div>
   </section>
 
-<section id="counter">
+  <section id="counter">
 
-  <div class="container p-5">
-    <div class="d-flex flex-wrap justify-content-center align-items-center">
-    <div><h2 class="text-center p-4">We already helped </h2></div>
-    <div><a href="#" id="counter-btn" class="btn btn-primary text-uppercase m-5 mx-auto">Count</a></div>
-  </div>
-    <div class="row">
-      <div class="col-md-3 col-sm-6">
-        <div class="counter">
-          <svg x="0" y="0" width="200px" height="200px" viewBox="0 0 200 200">
-            <ellipse id="XMLID_18_" fill="#fff" cx="98.989" cy="103.608" rx="98.989" ry="96.392"/>
-            <path id="XMLID_61_" fill="#8a3b97" d="M98.89,200c35.826,0,67.204-18.533,84.58-46.289c-1.611,1.152-28.674,27.49-84.408,23.651
+    <div class="container p-5">
+      <div class="d-flex flex-wrap justify-content-center align-items-center">
+        <div><h2 class="text-center p-4">We already helped </h2></div>
+        <div><a href="#" id="counter-btn" class="btn btn-primary text-uppercase m-5 mx-auto">Count</a></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <div class="counter">
+            <svg x="0" y="0" width="200px" height="200px" viewBox="0 0 200 200">
+              <ellipse id="XMLID_18_" fill="#fff" cx="98.989" cy="103.608" rx="98.989" ry="96.392"/>
+              <path id="XMLID_61_" fill="#8a3b97" d="M98.89,200c35.826,0,67.204-18.533,84.58-46.289c-1.611,1.152-28.674,27.49-84.408,23.651
  c-28.365-1.955-38.415,5.755-41.691,13.769C69.999,196.82,84.062,200,98.89,200z"/>
-            <path id="XMLID_20_" fill="#8a3b97" d="M64.005,13.934c0-0.004,0.001-0.012,0.001-0.012c-2.463-1.004-3.301-2.504-3.455-3.89
+              <path id="XMLID_20_" fill="#8a3b97" d="M64.005,13.934c0-0.004,0.001-0.012,0.001-0.012c-2.463-1.004-3.301-2.504-3.455-3.89
  c-0.214-1.946,1.532-4.378,3.422-5.044C74.387,1.325,80.77,8.873,80.77,8.873l2.75-0.399c-5.414-6.275-11.986-7.284-17.383-6.442
  c-3.817,0.595-7.303,2.39-10.208,4.875c-4.445,3.803-7.88,3.155-7.88,3.155l-0.04,0.058c-0.754-0.038-1.512-0.058-2.276-0.058
  c-24.297,0-43.995,19.181-43.995,42.841c0,11.581,4.728,22.083,12.396,29.792l-0.014,0.002c6.883,6.682,5.943,13.461,5.943,13.461
  l0,0c-5.148,35.39-9.305,96.435,25.072,88.367l-1.022-0.664c0,0-30.975,4.986-18.011-80.804c0.527-2.658,2.715-9.368,11.222-8.104
  c0.167,0.031,0.335,0.057,0.502,0.087c0.223,0.041,0.442,0.076,0.673,0.127c0.718,0.157,1.326,0.233,1.841,0.244
  c1.769,0.21,3.566,0.333,5.392,0.333c24.298,0,43.996-19.181,43.996-42.841C89.727,35.593,79.179,20.692,64.005,13.934z"/>
-          </svg>
-          <div class="counter-icon fa fa-globe"></div>
-          <div class="counter-content">
-            <span class="counter-value">10</span>
-            <h3 class="title">Countries</h3>
+            </svg>
+            <div class="counter-icon fa fa-globe"></div>
+            <div class="counter-content">
+              <span class="counter-value">10</span>
+              <h3 class="title">Countries</h3>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-3 col-sm-6">
-        <div class="counter red">
-          <svg x="0" y="0" width="200px" height="200px" viewBox="0 0 200 200">
-            <ellipse id="XMLID_18_" fill="#fff" cx="98.989" cy="103.608" rx="98.989" ry="96.392"/>
-            <path id="XMLID_61_" fill="#d7292a" d="M98.89,200c35.826,0,67.204-18.533,84.58-46.289c-1.611,1.152-28.674,27.49-84.408,23.651
+        <div class="col-md-3 col-sm-6">
+          <div class="counter red">
+            <svg x="0" y="0" width="200px" height="200px" viewBox="0 0 200 200">
+              <ellipse id="XMLID_18_" fill="#fff" cx="98.989" cy="103.608" rx="98.989" ry="96.392"/>
+              <path id="XMLID_61_" fill="#d7292a" d="M98.89,200c35.826,0,67.204-18.533,84.58-46.289c-1.611,1.152-28.674,27.49-84.408,23.651
  c-28.365-1.955-38.415,5.755-41.691,13.769C69.999,196.82,84.062,200,98.89,200z"/>
-            <path id="XMLID_20_" fill="#d7292a" d="M64.005,13.934c0-0.004,0.001-0.012,0.001-0.012c-2.463-1.004-3.301-2.504-3.455-3.89
+              <path id="XMLID_20_" fill="#d7292a" d="M64.005,13.934c0-0.004,0.001-0.012,0.001-0.012c-2.463-1.004-3.301-2.504-3.455-3.89
  c-0.214-1.946,1.532-4.378,3.422-5.044C74.387,1.325,80.77,8.873,80.77,8.873l2.75-0.399c-5.414-6.275-11.986-7.284-17.383-6.442
  c-3.817,0.595-7.303,2.39-10.208,4.875c-4.445,3.803-7.88,3.155-7.88,3.155l-0.04,0.058c-0.754-0.038-1.512-0.058-2.276-0.058
  c-24.297,0-43.995,19.181-43.995,42.841c0,11.581,4.728,22.083,12.396,29.792l-0.014,0.002c6.883,6.682,5.943,13.461,5.943,13.461
  l0,0c-5.148,35.39-9.305,96.435,25.072,88.367l-1.022-0.664c0,0-30.975,4.986-18.011-80.804c0.527-2.658,2.715-9.368,11.222-8.104
  c0.167,0.031,0.335,0.057,0.502,0.087c0.223,0.041,0.442,0.076,0.673,0.127c0.718,0.157,1.326,0.233,1.841,0.244
  c1.769,0.21,3.566,0.333,5.392,0.333c24.298,0,43.996-19.181,43.996-42.841C89.727,35.593,79.179,20.692,64.005,13.934z"/>
-          </svg>
-          <div class="counter-icon fa fa-heart"></div>
-          <div class="counter-content">
-            <span class="counter-value">535</span>
-            <h3 class="title">Сardiologist appointments</h3>
+            </svg>
+            <div class="counter-icon fa fa-heart"></div>
+            <div class="counter-content">
+              <span class="counter-value">535</span>
+              <h3 class="title">Сardiologist appointments</h3>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="col-md-3 col-sm-6">
-        <div class="counter green">
-          <svg x="0" y="0" width="200px" height="200px" viewBox="0 0 200 200">
-            <ellipse id="XMLID_18_" fill="#fff" cx="98.989" cy="103.608" rx="98.989" ry="96.392"/>
-            <path id="XMLID_61_" fill="#0baa98" d="M98.89,200c35.826,0,67.204-18.533,84.58-46.289c-1.611,1.152-28.674,27.49-84.408,23.651
+        <div class="col-md-3 col-sm-6">
+          <div class="counter green">
+            <svg x="0" y="0" width="200px" height="200px" viewBox="0 0 200 200">
+              <ellipse id="XMLID_18_" fill="#fff" cx="98.989" cy="103.608" rx="98.989" ry="96.392"/>
+              <path id="XMLID_61_" fill="#0baa98" d="M98.89,200c35.826,0,67.204-18.533,84.58-46.289c-1.611,1.152-28.674,27.49-84.408,23.651
  c-28.365-1.955-38.415,5.755-41.691,13.769C69.999,196.82,84.062,200,98.89,200z"/>
-            <path id="XMLID_20_" fill="#0baa98" d="M64.005,13.934c0-0.004,0.001-0.012,0.001-0.012c-2.463-1.004-3.301-2.504-3.455-3.89
+              <path id="XMLID_20_" fill="#0baa98" d="M64.005,13.934c0-0.004,0.001-0.012,0.001-0.012c-2.463-1.004-3.301-2.504-3.455-3.89
  c-0.214-1.946,1.532-4.378,3.422-5.044C74.387,1.325,80.77,8.873,80.77,8.873l2.75-0.399c-5.414-6.275-11.986-7.284-17.383-6.442
  c-3.817,0.595-7.303,2.39-10.208,4.875c-4.445,3.803-7.88,3.155-7.88,3.155l-0.04,0.058c-0.754-0.038-1.512-0.058-2.276-0.058
  c-24.297,0-43.995,19.181-43.995,42.841c0,11.581,4.728,22.083,12.396,29.792l-0.014,0.002c6.883,6.682,5.943,13.461,5.943,13.461
  l0,0c-5.148,35.39-9.305,96.435,25.072,88.367l-1.022-0.664c0,0-30.975,4.986-18.011-80.804c0.527-2.658,2.715-9.368,11.222-8.104
  c0.167,0.031,0.335,0.057,0.502,0.087c0.223,0.041,0.442,0.076,0.673,0.127c0.718,0.157,1.326,0.233,1.841,0.244
  c1.769,0.21,3.566,0.333,5.392,0.333c24.298,0,43.996-19.181,43.996-42.841C89.727,35.593,79.179,20.692,64.005,13.934z"/>
-          </svg>
-          <div class="counter-icon fa fa-rocket"></div>
-          <div class="counter-content">
-            <span class="counter-value">956</span>
-            <h3 class="title">Dental appointments</h3>
+            </svg>
+            <div class="counter-icon fa fa-rocket"></div>
+            <div class="counter-content">
+              <span class="counter-value">956</span>
+              <h3 class="title">Dental appointments</h3>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <div class="counter orange">
-          <svg x="0" y="0" width="200px" height="200px" viewBox="0 0 200 200">
-            <ellipse id="XMLID_18_" fill="#fff" cx="98.989" cy="103.608" rx="98.989" ry="96.392"/>
-            <path id="XMLID_61_" fill="#f48529" d="M98.89,200c35.826,0,67.204-18.533,84.58-46.289c-1.611,1.152-28.674,27.49-84.408,23.651
+        <div class="col-md-3 col-sm-6">
+          <div class="counter orange">
+            <svg x="0" y="0" width="200px" height="200px" viewBox="0 0 200 200">
+              <ellipse id="XMLID_18_" fill="#fff" cx="98.989" cy="103.608" rx="98.989" ry="96.392"/>
+              <path id="XMLID_61_" fill="#f48529" d="M98.89,200c35.826,0,67.204-18.533,84.58-46.289c-1.611,1.152-28.674,27.49-84.408,23.651
  c-28.365-1.955-38.415,5.755-41.691,13.769C69.999,196.82,84.062,200,98.89,200z"/>
-            <path id="XMLID_20_" fill="#f48529" d="M64.005,13.934c0-0.004,0.001-0.012,0.001-0.012c-2.463-1.004-3.301-2.504-3.455-3.89
+              <path id="XMLID_20_" fill="#f48529" d="M64.005,13.934c0-0.004,0.001-0.012,0.001-0.012c-2.463-1.004-3.301-2.504-3.455-3.89
  c-0.214-1.946,1.532-4.378,3.422-5.044C74.387,1.325,80.77,8.873,80.77,8.873l2.75-0.399c-5.414-6.275-11.986-7.284-17.383-6.442
  c-3.817,0.595-7.303,2.39-10.208,4.875c-4.445,3.803-7.88,3.155-7.88,3.155l-0.04,0.058c-0.754-0.038-1.512-0.058-2.276-0.058
  c-24.297,0-43.995,19.181-43.995,42.841c0,11.581,4.728,22.083,12.396,29.792l-0.014,0.002c6.883,6.682,5.943,13.461,5.943,13.461
  l0,0c-5.148,35.39-9.305,96.435,25.072,88.367l-1.022-0.664c0,0-30.975,4.986-18.011-80.804c0.527-2.658,2.715-9.368,11.222-8.104
  c0.167,0.031,0.335,0.057,0.502,0.087c0.223,0.041,0.442,0.076,0.673,0.127c0.718,0.157,1.326,0.233,1.841,0.244
  c1.769,0.21,3.566,0.333,5.392,0.333c24.298,0,43.996-19.181,43.996-42.841C89.727,35.593,79.179,20.692,64.005,13.934z"/>
-          </svg>
-          <div class="counter-icon fa fa-briefcase"></div>
-          <div class="counter-content">
-            <span class="counter-value">1812</span>
-            <h3 class="title">Therapist appointments</h3>
+            </svg>
+            <div class="counter-icon fa fa-briefcase"></div>
+            <div class="counter-content">
+              <span class="counter-value">1812</span>
+              <h3 class="title">Therapist appointments</h3>
+            </div>
           </div>
         </div>
-      </div>
-    </div><!-- /.row -->
-  </div><!-- /.container -->
+      </div><!-- /.row -->
+    </div><!-- /.container -->
 
-</section>
+  </section>
   <footer class="footer page-footer font-small ">
     <div class="footer-copyright text-center  text-white  py-3">© 2018 Copyright:
       <a href="#"> MedicalSite.com</a>
