@@ -64,8 +64,11 @@ class Form {
                     loginButton.innerText = '+ Создать';
                 }
 
+        console.log(response);
+        console.log(response.data);
       })
       .catch(function(error) {
+        console.log(error);
       });
 
     axios.post("/login", data).then(response => console.log(response));
