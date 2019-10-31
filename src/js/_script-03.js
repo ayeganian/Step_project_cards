@@ -15,22 +15,22 @@ class Form {
       e.preventDefault();
       const data =  this.serialize();
         if (this._form.id === 'login-form') {
-          this._requestLogin(data);
+          // this._requestLogin(data);
           }
           const selectedDoctor = this._form.previousElementSibling.value;
           if (e.target.className.includes('doctor-select-form')) {
             if (selectedDoctor === 'Cardio') {
               const visitCardio = new VisitCardio(data);
               visitCardio.render(document.querySelector('.cards-desk'));
-              this._requestCards(data);
+              // this._requestCards(data);
             } else if (selectedDoctor === 'Dantist') {
               const visitDentist = new VisitDentist(data);
               visitDentist.render(document.querySelector('.cards-desk'));
-              this._requestCards(data);
+              // this._requestCards(data);
             } else if (selectedDoctor === 'Therapist') {
               const visitTherapist = new VisitTherapist(data);
               visitTherapist.render(document.querySelector('.cards-desk'));
-              this._requestCards(data);
+              // this._requestCards(data);
             }
             this._form.closest(".modal-overlay").classList.add('is-hidden');
           }
