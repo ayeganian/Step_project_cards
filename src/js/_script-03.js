@@ -92,7 +92,6 @@ class Form {
                 } else {
                     console.log('Карточка добавлена');
                 }
-
             })
             .catch(function(error) {
                 // console.log(error);
