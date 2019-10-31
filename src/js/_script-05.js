@@ -1,7 +1,6 @@
 const modal = new Modal(document.getElementById('login-modal'));
 document.querySelector('.login-btn').openModal = modal.open.bind(modal);
 
-
 const loginForm = new Form('GET', 'login-form', 'login-wrapper');
 loginForm.render(document.getElementById('modal'));
 
@@ -12,13 +11,9 @@ const passwordInput = new Input('password', 'Enter your password', 'password' ,'
 passwordInput.render(document.getElementById('login-form'));
 
 const submitInput = new Input('submit', '','' , 'Login');
-// submitInput.value = 'Check me'
 submitInput.render(document.getElementById('login-form'));
-//
-// const visit = new Visit(data);
-// visit.render(document.querySelector('.cards-desk'));
 
-  const modalCard = new Modal(document.getElementById('add-card-modal'));
+const modalCard = new Modal(document.getElementById('add-card-modal'));
 const addCardBtn = document.querySelector('.add-card-btn');
 addCardBtn.openModal = modalCard.open.bind(modalCard);
 
@@ -26,8 +21,8 @@ const formCard = new Form("POST", 'visit-modal', 'class-cardio');
 formCard.render(document.querySelector('#card-modal'));
 
 const select = new Select('add', 'select-doctors',  '-select doctor-', 'Cardio', 'Dantist', 'Therapist');
-
 select.render(document.getElementById('visit-modal'));
+
 let selectDoctor = document.getElementById('select-doctors');
 selectDoctor.addEventListener('change', function () {
   const removeForm = document.getElementsByClassName('doctor-select-form');
@@ -35,7 +30,6 @@ selectDoctor.addEventListener('change', function () {
   if(removeForm.length === 1) {
       removeForm[0].remove();
   }
-  // if (removeForm) {
     switch (doctor) {
       case 'Cardio':
         const cardioForm = new CardioForm('POST', '','doctor-select-form');
@@ -50,12 +44,6 @@ selectDoctor.addEventListener('change', function () {
         therapistForm.render(document.getElementById('visit-modal'));
         break;
     }
-  // }
 });
 
 const visitArr = [];
-
-
-
-
-
