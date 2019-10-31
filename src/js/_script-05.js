@@ -39,7 +39,6 @@ selectDoctor.addEventListener('change', function () {
 
       const cardioForm = new CardioForm('POST', '','doctor-select-form');
       cardioForm.render(document.getElementById('visit-modal'));
-
       break;
     case 'Dantist':
       const dantistForm = new DantistForm('POST', '','doctor-select-form');
