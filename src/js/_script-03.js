@@ -5,14 +5,6 @@ class Form {
         this._classArr = classArr;
         this._form = null;
     }
-    // setType(newAction) {
-    //     const actions = ['POST', 'GET', 'DELETE', 'PULL'];
-    //     if (actions.includes(newAction)) {
-    //         this._action = newAction;
-    //     } else {
-    //         return false;
-    //     }
-    // };
     render(container) {
         this._form = document.createElement("form");
         this._form.id = this._id;
@@ -22,43 +14,50 @@ class Form {
             e.preventDefault();
 
             const data =  this.serialize();
+          //   const  formData = {
+          //     doctor: this._doctor,
+          //     title: this._visit,
+          //     description: this._description,
+          //     status: this._status,
+          //     priority: this._priority,
+          //     content: {
+          //       bp: "24",
+          //       age: this._age,
+          //       weight: 70
+          //     }
+          //
+          // }
+          const  formData = data;
+          axios.post('http://cards.danit.com.ua/cards', formData, {
+            headers: { Authorization: `Bearer 8eca04c25c57` }
+          })
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          axios.get('http://cards.danit.com.ua/cards') .then((response) => {
+            console.log(response);
+          })
 
-            if (this._form.id === 'login-form') {
+          if (this._form.id === 'login-form') {
                 this.requestLogin(data);
             }
             const selectedDoctor = this._form.previousElementSibling.value;
 
-            // const visit = new Visit("fggh", 'efgg', 'adf', 'eggrg', 'wegw');
-            // debugger;
-            // console.log(data);
-
-
-            // console.log(this.serialize(visit));
             if (e.target.className.includes('doctor-select-form')) {
                 if (selectedDoctor === 'Cardio') {
                 const visitCardio = new VisitCardio(data);
                 visitCardio.render(document.querySelector('.cards-desk'))
                 }
-                // console.log(visit);
-                // console.log(data);
-                // console.log(visit);
             }
                 this._form.closest(".modal-overlay").classList.add('is-hidden');
         });
-        // this._form.addEventListener('click', ev => {
-        //     if (ev.currentTarget.id === 'id-cardio') {
-        //         const visit = new Visit(data);
-        //         console.log(ev.currentTarget);
-        //         // console.log(data);
-        //         // console.log(visit);
-        //     }
-        // });
-
             container.appendChild(this._form);
     }
     serialize() {
         const inputs = this._form.querySelectorAll("input:not([type='submit']), select ");
-        // const inputs = this._form.querySelectorAll("input:not([type='submit'])", "option[value]");
         const arr = [...inputs].filter(item => item.value);
         const obj = {};
         arr.forEach(input => {
@@ -66,7 +65,6 @@ class Form {
             });
         return obj;
     }
-
     requestLogin(data) {
         const authOptions = {
             method: 'POST',
@@ -85,8 +83,6 @@ class Form {
                     loginButton.innerText = '+ Создать';
                     console.log('Правильно введен логин или пароль');
                 }
-
-                 // console.log(response);
                 const objectOfLogin = response.data.token;
                 console.log(objectOfLogin);
                 // return objectOfLogin
