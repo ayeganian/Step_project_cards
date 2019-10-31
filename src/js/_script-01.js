@@ -82,9 +82,10 @@ class Visit {
     this._card.innerHTML = `<div class="card-body bg-dark text-white text-center ">
        <h3 class="card-title">${this._fullName}</h3>
        <h5 class="card-title"><img class="card-logo mr-2" src="/img/icon.png" alt="icon">${this._fullName}</h5>
-       <h5 class="testOne">${this._status}</h5>
-       <div class="additional-info hidden"></div>
-       <button class="show-more btn btn-success m-2">Показать больше</button>
+       <h5 class="testOne">${this._status}</h5> 
+<!--       ПЕРЕДЕЛАТЬ СТАТУТУС-->
+       <div class="additional-info hidden collapse" id="additional-info"></div>
+       <button class="show-more btn btn-success m-2" data-toggle="collapse" data-target="#additional-info" aria-expanded="false" aria-controls="collapseExample">Показать больше</button>
        <button class="btn btn-primary m-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton" >Редактировать</button>
        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <button class="dropdown-item update-card" onclick="openModal()">Редактировать</button>
@@ -139,9 +140,8 @@ render(wrapper) {
 
 
  } else if (event.target.classList.contains("update-card")) {
-        const updateBtn = this._card.querySelector('.update-card');
-        const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
-        updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
+        // const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
+        // updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
     // const cardioForm = new CardioForm('POST', '','doctor-select-form');
     // cardioForm.render(updateData);
 
@@ -151,6 +151,9 @@ render(wrapper) {
         this._card.querySelector('.testOne').innerText = 'done';
       }
   })
+        const updateBtn = this._card.querySelector('.update-card');
+  const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
+  updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
 }
 
 }
