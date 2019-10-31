@@ -125,7 +125,6 @@ class Form {
             .catch(function(error) {
                 // console.log(error);
             });
-
         axios.post("/cards", data).then(response => console.log(response));
     }
 
