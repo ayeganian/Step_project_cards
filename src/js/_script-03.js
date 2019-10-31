@@ -5,14 +5,7 @@ class Form {
     this._classArr = classArr;
     this._form = null;
   }
-  // setType(newAction) {
-  //     const actions = ['POST', 'GET', 'DELETE', 'PULL'];
-  //     if (actions.includes(newAction)) {
-  //         this._action = newAction;
-  //     } else {
-  //         return false;
-  //     }
-  // };
+
   render(container) {
     this._form = document.createElement("form");
     this._form.id = this._id;
@@ -20,49 +13,33 @@ class Form {
     this._form.action = this._action;
     this._form.addEventListener("submit", (e) => {
       e.preventDefault();
-
       const data =  this.serialize();
-
         if (this._form.id === 'login-form') {
-            this._requestLogin(data);
-            this._requestGetCards(data);
-        }
-
-            const selectedDoctor = this._form.previousElementSibling.value;
-
-            // const visit = new Visit("fggh", 'efgg', 'adf', 'eggrg', 'wegw');
-            // debugger;
-            // console.log(data);
-
-
-            // console.log(this.serialize(visit));
-            if (e.target.className.includes('doctor-select-form')) {
-                if (selectedDoctor === 'Cardio') {
-                const visitCardio = new VisitCardio(data);
-                visitCardio.render(document.querySelector('.cards-desk'));
-
-                this._requestAddCards(data);
-                }
-                // console.log(visit);
-                // console.log(data);
-                // console.log(visit);
+          this._requestLogin(data);
+          }
+          const selectedDoctor = this._form.previousElementSibling.value;
+          if (e.target.className.includes('doctor-select-form')) {
+            if (selectedDoctor === 'Cardio') {
+              const visitCardio = new VisitCardio(data);
+              visitCardio.render(document.querySelector('.cards-desk'));
+              this._requestCards(data);
+            } else if (selectedDoctor === 'Dantist') {
+              const visitDentist = new VisitDentist(data);
+              visitDentist.render(document.querySelector('.cards-desk'));
+              this._requestCards(data);
+            } else if (selectedDoctor === 'Therapist') {
+              const visitTherapist = new VisitTherapist(data);
+              visitTherapist.render(document.querySelector('.cards-desk'));
+              this._requestCards(data);
             }
-                this._form.closest(".modal-overlay").classList.add('is-hidden');
-        });
-        // this._form.addEventListener('click', ev => {
-        //     if (ev.currentTarget.id === 'id-cardio') {
-        //         const visit = new Visit(data);
-        //         console.log(ev.currentTarget);
-        //         // console.log(data);
-        //         // console.log(visit);
-        //     }
-        // });
-
+            this._form.closest(".modal-overlay").classList.add('is-hidden');
+          }
+    });
     container.appendChild(this._form);
   }
+
   serialize() {
     const inputs = this._form.querySelectorAll("input:not([type='submit']), select ");
-    // const inputs = this._form.querySelectorAll("input:not([type='submit'])", "option[value]");
     const arr = [...inputs].filter(item => item.value);
     const obj = {};
     arr.forEach(input => {
@@ -70,13 +47,12 @@ class Form {
     });
     return obj;
   }
-
-    _requestLogin(data) {
-        const authOptions = {
-            method: 'POST',
-            url: 'http://cards.danit.com.ua/login',
-            data: JSON.stringify(data),
-        };
+  _requestLogin(data) {
+    const authOptions = {
+    method: 'POST',
+    url: 'http://cards.danit.com.ua/login',
+    data: JSON.stringify(data),
+  };
         axios(authOptions)
             .then(function(response) {
                 if (response.data.status !== 'Success') {
@@ -89,11 +65,8 @@ class Form {
                     loginButton.classList.add('is-hidden');
                 }
 
-        console.log(response);
-        console.log(response.data);
       })
       .catch(function(error) {
-        console.log(error);
       });
 
     axios.post("/login", data).then(response => console.log(response));
@@ -145,10 +118,10 @@ class Form {
                     console.log('Карточка добавлена');
                     data = response.data;
                 }
-                data = response.data;
+
             })
             .catch(function(error) {
-                console.log(error);
+                // console.log(error);
             });
 
         axios.post("/cards", data).then(response => console.log(response));
@@ -165,7 +138,7 @@ class CardioForm extends Form {
     const visitPurpose = new Input('text', 'Enter purpose of visit', 'visit-purpose', '', '', '', 'form-control', 'my-2');
     const description = new Input('text', 'Description', 'description', '', '', '', 'form-control', 'my-2');
     const selectCardio = new Select('cardio-select', '', 'Ivanov', 'Petrov', 'Sidorov');
-    const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High', '', '', 'form-control', 'my-2');
+    const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
     const bloodPressure = new Input ('text', 'Pressure', 'pressure', '', '', '', 'form-control', 'my-2');
     const weightIndex = new Input('number', 'Index', 'weight-index', '', '', '', 'form-control', 'my-2');
     const diseases = new Input('','Diseases', 'diseases', '', '', '', 'form-control', 'my-2');
@@ -182,11 +155,6 @@ class CardioForm extends Form {
     diseases.render(this._form);
     age.render(this._form);
     fullName.render(this._form);
-
-    // titleCard.render(this._form);
-    // patientName.render(this._form);
-    // status.render(this._form);
-    // priority.render(this._form);
     cardSubmit.render(this._form);
   }
 }
@@ -197,12 +165,12 @@ class DantistForm extends Form {
   }
   render(container) {
     super.render(container);
-    const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose');
-    const description = new Input('text', 'Description', 'description');
+    const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose', '', '', '', 'form-control', 'my-2');
+    const description = new Input('text', 'Description', 'description', '', '', '', 'form-control', 'my-2');
     const selectDantist = new Select('dantist-select', '', 'Kurochkin', 'Ytkin', 'Petuh');
     const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
-    const date = new Input('date', 'date', 'date');
-    const fullName = new Input('','Full name', 'full-name');
+    const date = new Input('date', 'date', 'date', '', '', '', 'form-control', 'my-2');
+    const fullName = new Input('','Full name', 'full-name', '', '', '', 'form-control', 'my-2');
     const cardSubmit = new Input('submit', '', '', 'Отправить');
 
     visitPurpose.render(this._form);
