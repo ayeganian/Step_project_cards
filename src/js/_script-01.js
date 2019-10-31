@@ -50,6 +50,7 @@ class Visit {
   }
   render(wrapper) {
     this._card = document.createElement("div");
+    this._card.classList.add('my-3');
     this._card.innerHTML = `<div class="card-body text-white text-center ${this._status}-card">
        <h3 class="card-title">${this._fullName}</h3>
        <h5 class="card-title"><img class="card-logo mr-2 rounded-circle">${this._fullName}</h5>

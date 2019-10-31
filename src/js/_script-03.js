@@ -61,7 +61,8 @@ class Form {
                     errorLogin.textContent = 'Неправильно введен логин или пароль';
                 } else {
                     const loginButton = document.querySelector('.login-btn');
-                    loginButton.innerText = '+ Создать';
+                    // loginButton.innerText = '+ Создать';
+                    loginButton.classList.add('is-hidden');
                 }
 
         console.log(response);
@@ -73,8 +74,35 @@ class Form {
 
     axios.post("/login", data).then(response => console.log(response));
   }
+  _requestGetCards(data) {
+      const token = '8eca04c25c57';
+      const authOptions = {
+          method: 'GET',
+          url: 'http://cards.danit.com.ua/cards',
+          data: JSON.stringify(data),
+          headers: {
+              Authorization: `Bearer ${token}`,
+          }
+      };
 
-    _requestCards(data) {
+      axios(authOptions)
+          .then(function(response) {
+              if (response.status !== 200) {
+                  console.log('Карточки не получены');
+              } else {
+                  console.log('Карточки получены');
+              }
+              console.log(response);
+              console.log(response.data);
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+
+      axios.get("/cards", data).then(response => console.log(response));
+  }
+
+    _requestAddCards(data) {
         const token = '8eca04c25c57';
         const authOptions = {
             method: 'POST',
@@ -87,12 +115,12 @@ class Form {
 
         axios(authOptions)
             .then(function(response) {
-                if (response.data.status !== 'Success') {
+                if (response.status !== 200) {
                     console.log('Карточка не добавлена');
                 } else {
                     console.log('Карточка добавлена');
+                    data = response.data;
                 }
-
             })
             .catch(function(error) {
                 // console.log(error);
