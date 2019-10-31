@@ -52,7 +52,6 @@ selectDoctor.addEventListener('change', function () {
   }
 });
 
-
 // let select = new Select('add', 'select-doctors',  '-select doctor-', 'Cardio', 'Dantist', 'Therapist');
 // select.render(document.getElementById('visit-modal'));
 //
