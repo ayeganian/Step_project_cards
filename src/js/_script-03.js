@@ -23,36 +23,42 @@ class Form {
 
       const data =  this.serialize();
 
-      if (this._form.id === 'login-form') {
-        this.requestLogin(data);
-      }
-      const selectedDoctor = this._form.previousElementSibling.value;
+            if (this._form.id === 'login-form') {
+                this._requestLogin(data);
+            }
+            // if (e.currentTarget.classList.contains('doctor-select-form')) {
+            //     this.requestCards(data);
+            // }
 
-      // const visit = new Visit("fggh", 'efgg', 'adf', 'eggrg', 'wegw');
-      // debugger;
-      // console.log(data);
+            const selectedDoctor = this._form.previousElementSibling.value;
+
+            // const visit = new Visit("fggh", 'efgg', 'adf', 'eggrg', 'wegw');
+            // debugger;
+            // console.log(data);
 
 
-      // console.log(this.serialize(visit));
-      if (e.target.className.includes('doctor-select-form')) {
-        if (selectedDoctor === 'Cardio') {
-          const visitCardio = new VisitCardio(data);
-          visitCardio.render(document.querySelector('.cards-desk'))
-        }
-        // console.log(visit);
-        // console.log(data);
-        // console.log(visit);
-      }
-      this._form.closest(".modal-overlay").classList.add('is-hidden');
-    });
-    // this._form.addEventListener('click', ev => {
-    //     if (ev.currentTarget.id === 'id-cardio') {
-    //         const visit = new Visit(data);
-    //         console.log(ev.currentTarget);
-    //         // console.log(data);
-    //         // console.log(visit);
-    //     }
-    // });
+            // console.log(this.serialize(visit));
+            if (e.target.className.includes('doctor-select-form')) {
+                if (selectedDoctor === 'Cardio') {
+                const visitCardio = new VisitCardio(data);
+                visitCardio.render(document.querySelector('.cards-desk'));
+
+                this._requestCards(data);
+                }
+                // console.log(visit);
+                // console.log(data);
+                // console.log(visit);
+            }
+                this._form.closest(".modal-overlay").classList.add('is-hidden');
+        });
+        // this._form.addEventListener('click', ev => {
+        //     if (ev.currentTarget.id === 'id-cardio') {
+        //         const visit = new Visit(data);
+        //         console.log(ev.currentTarget);
+        //         // console.log(data);
+        //         // console.log(visit);
+        //     }
+        // });
 
     container.appendChild(this._form);
   }
@@ -67,24 +73,22 @@ class Form {
     return obj;
   }
 
-  requestLogin(data) {
-    const authOptions = {
-      method: 'POST',
-      url: 'http://cards.danit.com.ua/login',
-      data: JSON.stringify(data),
-    };
-    axios(authOptions)
-      .then(function(response) {
-        if (response.data.status !== 'Success') {
-          const errorLogin = document.createElement('p');
-          document.querySelector('#login-form').insertAdjacentElement('beforeend', errorLogin);
-          return errorLogin.textContent = 'Неправильно введен логин или пароль';
-          console.log('Неправильно введен логин или пароль');
-        } else {
-          const loginButton = document.querySelector('.login-btn');
-          loginButton.innerText = '+ Создать';
-          console.log('Правильно введен логин или пароль');
-        }
+    _requestLogin(data) {
+        const authOptions = {
+            method: 'POST',
+            url: 'http://cards.danit.com.ua/login',
+            data: JSON.stringify(data),
+        };
+        axios(authOptions)
+            .then(function(response) {
+                if (response.data.status !== 'Success') {
+                    const errorLogin = document.createElement('p');
+                    document.querySelector('#login-form').insertAdjacentElement('beforeend', errorLogin);
+                    errorLogin.textContent = 'Неправильно введен логин или пароль';
+                } else {
+                    const loginButton = document.querySelector('.login-btn');
+                    loginButton.innerText = '+ Создать';
+                }
 
         console.log(response);
         console.log(response.data);
@@ -95,6 +99,35 @@ class Form {
 
     axios.post("/login", data).then(response => console.log(response));
   }
+
+    _requestCards(data) {
+        const token = '8eca04c25c57';
+        const authOptions = {
+            method: 'POST',
+            url: 'http://cards.danit.com.ua/cards',
+            data: JSON.stringify(data),
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        };
+
+        axios(authOptions)
+            .then(function(response) {
+                if (response.data.status !== 'Success') {
+                    console.log('Карточка не добавлена');
+                } else {
+                    console.log('Карточка добавлена');
+                }
+
+                console.log(response);
+                console.log(response.data);
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+
+        axios.post("/cards", data).then(response => console.log(response));
+    }
 
 }
 
