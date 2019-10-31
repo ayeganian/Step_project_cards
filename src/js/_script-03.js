@@ -23,12 +23,10 @@ class Form {
 
       const data =  this.serialize();
 
-            if (this._form.id === 'login-form') {
-                this._requestLogin(data);
-            }
-            // if (e.currentTarget.classList.contains('doctor-select-form')) {
-            //     this.requestCards(data);
-            // }
+        if (this._form.id === 'login-form') {
+            this._requestLogin(data);
+            this._requestGetCards(data);
+        }
 
             const selectedDoctor = this._form.previousElementSibling.value;
 
@@ -43,7 +41,7 @@ class Form {
                 const visitCardio = new VisitCardio(data);
                 visitCardio.render(document.querySelector('.cards-desk'));
 
-                this._requestCards(data);
+                this._requestAddCards(data);
                 }
                 // console.log(visit);
                 // console.log(data);
@@ -87,7 +85,8 @@ class Form {
                     errorLogin.textContent = 'Неправильно введен логин или пароль';
                 } else {
                     const loginButton = document.querySelector('.login-btn');
-                    loginButton.innerText = '+ Создать';
+                    // loginButton.innerText = '+ Создать';
+                    loginButton.classList.add('is-hidden');
                 }
 
         console.log(response);
@@ -99,8 +98,35 @@ class Form {
 
     axios.post("/login", data).then(response => console.log(response));
   }
+  _requestGetCards(data) {
+      const token = '8eca04c25c57';
+      const authOptions = {
+          method: 'GET',
+          url: 'http://cards.danit.com.ua/cards',
+          data: JSON.stringify(data),
+          headers: {
+              Authorization: `Bearer ${token}`,
+          }
+      };
 
-    _requestCards(data) {
+      axios(authOptions)
+          .then(function(response) {
+              if (response.status !== 200) {
+                  console.log('Карточки не получены');
+              } else {
+                  console.log('Карточки получены');
+              }
+              console.log(response);
+              console.log(response.data);
+          })
+          .catch(function(error) {
+              console.log(error);
+          });
+
+      axios.get("/cards", data).then(response => console.log(response));
+  }
+
+    _requestAddCards(data) {
         const token = '8eca04c25c57';
         const authOptions = {
             method: 'POST',
@@ -113,14 +139,13 @@ class Form {
 
         axios(authOptions)
             .then(function(response) {
-                if (response.data.status !== 'Success') {
+                if (response.status !== 200) {
                     console.log('Карточка не добавлена');
                 } else {
                     console.log('Карточка добавлена');
+                    data = response.data;
                 }
-
-                console.log(response);
-                console.log(response.data);
+                data = response.data;
             })
             .catch(function(error) {
                 console.log(error);
