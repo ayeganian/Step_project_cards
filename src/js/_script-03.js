@@ -72,6 +72,19 @@ class Form {
     axios.get('cards')
         .then((response) => {
           console.log((response.data));
+
+          response.data.forEach(card => {
+            if (card['cardio-select']) {
+              const cardioCard = new VisitCardio(card);
+              cardioCard.render(document.querySelector('.cards-desk'));
+            } else if (card['dantist-select']) {
+              const dentistCard = new VisitDentist(card);
+              dentistCard.render(document.querySelector('.cards-desk'));
+            } else if (card['therapist-select']) {
+              const therapistCard = new VisitTherapist(card);
+              therapistCard.render(document.querySelector('.cards-desk'));
+            }
+          });
           // ТУТ ПОЯВЛЯЕТСЯ МАССИВ С ОБЪЕКТАМИ- КАРТОЧКАМИ КОТОРЫЕ НАДО ВЫВОДИТЬ
         })
         .catch((error) => {
