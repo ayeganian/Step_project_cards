@@ -1,16 +1,18 @@
 const modal = new Modal(document.getElementById('login-modal'));
 document.querySelector('.login-btn').openModal = modal.open.bind(modal);
 
+
 const loginForm = new Form('GET', 'login-form', 'login-wrapper');
 loginForm.render(document.getElementById('modal'));
 
-const emailInput = new Input('email', 'Enter your email', 'email' ,'', '', 'annettt@gmail.com');
+const emailInput = new Input('email', 'Enter your email', 'email', 'annettt@gmail.com', 'login-form-email' , '',  '');
 emailInput.render(document.getElementById('login-form'));
 
-const passwordInput = new Input('password', 'Enter your password', 'password' ,'123456');
+const passwordInput = new Input('password', 'Enter your password', 'password' ,'123456', 'login-form-password', '', '');
 passwordInput.render(document.getElementById('login-form'));
 
-const submitInput = new Input('submit', '','' , 'Login');
+const submitInput = new Input('submit', '','' , 'Login', 'login-form-btn','');
+// submitInput.value = 'Check me'
 submitInput.render(document.getElementById('login-form'));
 
 const modalCard = new Modal(document.getElementById('add-card-modal'));
