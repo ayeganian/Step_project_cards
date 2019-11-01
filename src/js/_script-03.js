@@ -172,7 +172,7 @@ class DantistForm extends Form {
     const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
     const date = new Input('date', 'date', 'date', '', '', '', 'form-control', 'my-2');
     const fullName = new Input('','Full name', 'full-name', '', '', '', 'form-control', 'my-2');
-    const cardSubmit = new Input('submit', '', '', 'Отправить');
+    const cardSubmit = new Input('submit', '', '', 'Отправить', '', '', 'btn', 'btn-primary');
 
     visitPurpose.render(this._form);
     description.render(this._form);
@@ -190,13 +190,13 @@ class TherapistForm extends Form {
   }
   render(container) {
     super.render(container);
-    const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose');
-    const description = new Input('', 'Description', 'description');
+    const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose', '', '', '', 'form-control', 'my-2');
+    const description = new Input('', 'Description', 'description', '', '', '', 'form-control', 'my-2');
     const selectTherapist = new Select('therapist-select', '', 'Monatik', 'Maruv', 'Loboda');
     const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
-    const age = new Input('number','Age', 'age');
-    const fullName = new Input('','Full name', 'full-name');
-    const cardSubmit = new Input('submit', '', '', 'Отправить');
+    const age = new Input('number','Age', 'age', '', '', '', 'form-control', 'my-2');
+    const fullName = new Input('','Full name', 'full-name', '', '', '', 'form-control', 'my-2');
+    const cardSubmit = new Input('submit', '', '', 'Отправить', '', '', 'btn', 'btn-primary');
 
     visitPurpose.render(this._form);
     description.render(this._form);
