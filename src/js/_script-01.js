@@ -85,6 +85,17 @@ class Visit {
       }
   });
   }
+  postCard(data) {
+    return new Promise((resolve, reject) => {
+      axios.post('cards', data,)
+          .then((response) => {
+            resolve(response.data.id);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+    })
+  }
 
   deleteCard(id){
     return new Promise((resolve, reject) => {
@@ -113,18 +124,25 @@ class Visit {
 
   visitEdit() {
     const newForm = new Form(this._card._id, ...args);
-  }
 
-  postCard(data) {
-    return new Promise((resolve, reject) => {
-      axios.post('cards', data,)
-          .then((response) => {
-            resolve(response.data.id);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-    })
+// updateCard(id, data){
+//   return new Promise((resolve, reject) => {
+//     const authOptions = {
+//       method: 'PUT',
+//       url: `cards/${id}`,
+//       data: data
+//     }
+//     axios(authOptions).then((response) => {
+//       resolve(response);
+//     })
+//         .catch((error) => {
+//           reject(error);
+//         });
+//   }).then(response => {
+//     console.log(response);
+//   })
+// }
+
   }
 
 }
