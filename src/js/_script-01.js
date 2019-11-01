@@ -13,6 +13,10 @@ class Modal {
     this.overlay.classList.add('is-hidden');
   }
   open() {
+    const removeForm = document.getElementsByClassName('doctor-select-form');
+    if(removeForm.length === 1) {
+      removeForm[0].remove();
+    }
     this.overlay.classList.remove('is-hidden');
   }
 }
@@ -27,6 +31,7 @@ render(wrapper){
   const select = document.createElement('select');
   select.id = this._id;
   select.setAttribute('name', this._name);
+  select.classList.add('form-control', 'w-25', 'my-2');
   this._value.forEach((item, i) => {
     const option = document.createElement('option');
     option.setAttribute('value', item);
@@ -46,14 +51,15 @@ class Visit {
     this._priority = data['priority-select'];
     this._fullName = data['full-name'];
     this._info = null;
+    this._doctor = '';
     this._icon =['icon.png', 'icon2.png', 'icon3.png']
   }
   render(wrapper) {
     this._card = document.createElement("div");
     this._card.classList.add('my-3');
-    this._card.innerHTML = `<div class="card-body text-white text-center ${this._status}-card">
-       <h3 class="card-title">${this._fullName}</h3>
-       <h5 class="card-title"><img class="card-logo mr-2 rounded-circle">${this._fullName}</h5>
+    this._card.innerHTML = `<div class="card-body text-white text-center mx-2 ${this._status}-card">
+       <h3 class="card-title"><span class="text-info">Full Name: </span>${this._fullName}</h3>
+        <h5 class="card-title"><img class="card-logo mr-2 rounded-circle"><span class="text-info">Doctor: </span>${this._doctor}</h5>
        <div class="additional-info hidden" id="additional-info"></div>
        <button class="show-more btn btn-success m-2" >Показать больше</button>
        <button class="btn btn-primary m-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton" >Редактировать</button>
@@ -100,11 +106,10 @@ render(wrapper) {
         }
         const cardContent = this._card.querySelector('.additional-info');
         cardContent.classList.toggle('hidden');
-        cardContent.innerHTML = `<div>${this._doctor}</div>
-                      <div>${this._pressure}</div>
-                       <div>${this._weightIndex}</div>
-                       <div>${this._diseases}</div>
-                       <div>${this._age}</div>`
+        cardContent.innerHTML = `<div><span class="text-info">Pressure: </span>${this._pressure}</div>
+                       <div><span class="text-info">Weight Index: </span>${this._weightIndex}</div>
+                       <div><span class="text-info">Diseases: </span>${this._diseases}</div>
+                       <div><span class="text-info">Age: </span>${this._age}</div>`
  } else if (event.target.classList.contains("update-card")) {
   } else if (event.target.classList.contains("delete-card")) {
     this._card.remove();
@@ -131,8 +136,7 @@ class VisitDentist extends Visit {
       if (event.target.classList.contains("show-more")) {
         const cardContent = this._card.querySelector('.additional-info');
         cardContent.classList.toggle('hidden');
-        cardContent.innerHTML = `<div>${this._doctor}</div>
-                       <div>${this._date}</div>`
+        cardContent.innerHTML = `<div><span class="text-info">Date: </span>${this._date}</div>`
       } else if (event.target.classList.contains("update-card")) {
       } else if (event.target.classList.contains("delete-card")) {
         this._card.remove();
@@ -159,8 +163,7 @@ class VisitTherapist extends Visit {
       if (event.target.classList.contains("show-more")) {
         const cardContent = this._card.querySelector('.additional-info');
         cardContent.classList.toggle('hidden');
-        cardContent.innerHTML = `<div>${this._doctor}</div>
-                       <div>${this._age}</div>`
+        cardContent.innerHTML = `<div><span class="text-info">Age: </span>${this._age}</div>`
       } else if (event.target.classList.contains("update-card")) {
       } else if (event.target.classList.contains("delete-card")) {
         this._card.remove();
