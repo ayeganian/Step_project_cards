@@ -57,7 +57,9 @@ class Form {
             localStorage.setItem('token', JSON.stringify(response.data.token));
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + (JSON.parse(localStorage.getItem('token')));
             const headerLoginBtn = document.querySelector('.login-btn');
-            headerLoginBtn.innerText = 'Create';
+            const headerСreateBtn = document.querySelector('.add-card-btn');
+             headerLoginBtn.classList.toggle('is-hidden');
+            headerСreateBtn.classList.toggle('is-hidden');
             resolve(response.data.token);
           })
           .catch((error) => {

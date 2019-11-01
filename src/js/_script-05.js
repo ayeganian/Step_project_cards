@@ -19,6 +19,10 @@ const modalCard = new Modal(document.getElementById('add-card-modal'));
 const addCardBtn = document.querySelector('.add-card-btn');
 addCardBtn.openModal = modalCard.open.bind(modalCard);
 
+// const modalCard = new Modal(document.getElementById('add-card-modal'));
+// const addCardBtn = document.querySelector('.add-card-btn');
+// addCardBtn.openModal = modalCard.open.bind(modalCard);
+
 const formCard = new Form("POST", 'visit-modal', '');
 formCard.render(document.querySelector('#card-modal'));
 

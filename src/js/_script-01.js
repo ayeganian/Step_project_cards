@@ -9,12 +9,14 @@ class Modal {
       }
     });
   }
+
   close() {
     this.overlay.classList.add('is-hidden');
   }
+
   open() {
     const removeForm = document.getElementsByClassName('doctor-select-form');
-    if(removeForm.length === 1) {
+    if (removeForm.length === 1) {
       removeForm[0].remove();
     }
     this.overlay.classList.remove('is-hidden');
@@ -27,19 +29,20 @@ class Select {
     this._id = id;
     this._value = value;
   }
-render(wrapper){
-  const select = document.createElement('select');
-  select.id = this._id;
-  select.setAttribute('name', this._name);
-  select.classList.add('form-control', 'w-25', 'my-2');
-  this._value.forEach((item, i) => {
-    const option = document.createElement('option');
-    option.setAttribute('value', item);
-    option.innerText = item;
-    select.append(option)
-  });
-  wrapper.appendChild(select)
-}
+
+  render(wrapper) {
+    const select = document.createElement('select');
+    select.id = this._id;
+    select.setAttribute('name', this._name);
+    select.classList.add('form-control', 'w-25', 'my-2');
+    this._value.forEach((item, i) => {
+      const option = document.createElement('option');
+      option.setAttribute('value', item);
+      option.innerText = item;
+      select.append(option)
+    });
+    wrapper.appendChild(select)
+  }
 }
 
 class Visit {
@@ -52,25 +55,54 @@ class Visit {
     this._fullName = data['full-name'];
     this._info = null;
     this._doctor = '';
-    this._icon =['icon.png', 'icon2.png', 'icon3.png']
+    this._icon = ['icon.png', 'icon2.png', 'icon3.png'];
+    this.postCard(data).then(response => response).then(result => this._id = result)
   }
+
   render(wrapper) {
     this._card = document.createElement("div");
-    this._card.classList.add('my-3','drag-card', 'card', 'border-primary', 'm-3', 'bg-dark');
+    this._card.classList.add('my-3', 'drag-card', 'card', 'border-primary', 'm-3', 'bg-dark');
+    this._card.id = this._id;
     this._card.innerHTML = `<div class="card-body text-white text-center mx-2 ${this._status}-card">
        <h3 class="card-title"><span class="text-info">Full Name: </span>${this._fullName}</h3>
         <h5 class="card-title"><img class="card-logo mr-2 rounded-circle"><span class="text-info">Doctor: </span>${this._doctor}</h5>
        <div class="additional-info hidden" id="additional-info"></div>
-       <button class="show-more btn btn-success m-2" >Показать больше</button>
-       <button class="btn btn-primary m-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton" >Редактировать</button>
+       <button class="show-more btn btn-success m-2" >Show more</button>
+       <button class="btn btn-primary m-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton" >Edit</button>
        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <button class="dropdown-item update-card" onclick="openModal()">Редактировать</button>
-    <a class="dropdown-item delete-card" >Удалить</a>
-    <a class="dropdown-item change-status" >Завершить</a>
+    <button class="dropdown-item update-card" onclick="openModal()">Edit</button>
+    <a class="dropdown-item delete-card" >Delete</a>
+    <a class="dropdown-item change-status" >Finish</a>
   </div></div>`;
     wrapper.append(this._card);
     visitArr.push(this._card);
+
+    this._card.addEventListener('click', (event) => {
+   if (event.target.classList.contains("update-card")) {
+     console.log('We need to update card');
+      } else if (event.target.classList.contains("delete-card")) {
+      this.deleteCard(this._id)
+      }
+  });
   }
+
+  deleteCard(id){
+    return new Promise((resolve, reject) => {
+      const authOptions = {
+        method: 'DELETE',
+        url: `cards/${id}`,
+      }
+      axios(authOptions).then((response) => {
+        resolve(response);
+      })
+          .catch((error) => {
+            reject(error);
+          });
+    }).then(response => {
+      console.log(response);
+    })
+  }
+
 
   updateStatus(status) {
     const bodyCard = this._card.querySelector('.card-body');
@@ -82,6 +114,19 @@ class Visit {
   visitEdit() {
     const newForm = new Form(this._card._id, ...args);
   }
+
+  postCard(data) {
+    return new Promise((resolve, reject) => {
+      axios.post('cards', data,)
+          .then((response) => {
+            resolve(response.data.id);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+    })
+  }
+
 }
 
 class VisitCardio extends Visit {
@@ -94,15 +139,16 @@ class VisitCardio extends Visit {
     this._age = data['age'];
     this._class = classArr;
   }
-render(wrapper) {
-  super.render(wrapper);
-  this._card.querySelector('.card-logo').setAttribute('src', "/img/icon2.png");
+
+  render(wrapper) {
+    super.render(wrapper);
+    this._card.querySelector('.card-logo').setAttribute('src', "/img/icon2.png");
     this._card.addEventListener('click', (event) => {
       if (event.target.classList.contains("show-more")) {
-        if (event.target.textContent === 'Скрыть') {
-          event.target.textContent = 'Показать больше'
+        if (event.target.textContent === 'Hide') {
+          event.target.textContent = 'Show more'
         } else {
-          event.target.textContent = 'Скрыть'
+          event.target.textContent = 'Hide'
         }
         const cardContent = this._card.querySelector('.additional-info');
         cardContent.classList.toggle('hidden');
@@ -110,17 +156,18 @@ render(wrapper) {
                        <div><span class="text-info">Weight Index: </span>${this._weightIndex}</div>
                        <div><span class="text-info">Diseases: </span>${this._diseases}</div>
                        <div><span class="text-info">Age: </span>${this._age}</div>`
- } else if (event.target.classList.contains("update-card")) {
-  } else if (event.target.classList.contains("delete-card")) {
-    this._card.remove();
-  } else if (event.target.classList.contains("change-status")) {
-    this.updateStatus(this._status);
-  }
+      } else if (event.target.classList.contains("update-card")) {
+      } else if (event.target.classList.contains("delete-card")) {
+        this._card.remove();
+      } else if (event.target.classList.contains("change-status")) {
+        this.updateStatus(this._status);
+      }
     });
-  const updateBtn = this._card.querySelector('.update-card');
-  const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
-  updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
-}
+    const updateBtn = this._card.querySelector('.update-card');
+    const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
+    updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
+  }
+
 }
 
 class VisitDentist extends Visit {
@@ -129,6 +176,7 @@ class VisitDentist extends Visit {
     this._doctor = data['dantist-select'];
     this._date = data['date'];
   }
+
   render(wrapper) {
     super.render(wrapper);
     this._card.querySelector('.card-logo').setAttribute('src', "/img/icon.png");
@@ -156,6 +204,7 @@ class VisitTherapist extends Visit {
     this._doctor = data['therapist-select'];
     this._age = data['age'];
   }
+
   render(wrapper) {
     super.render(wrapper);
     this._card.querySelector('.card-logo').setAttribute('src', "/img/icon3.png");
