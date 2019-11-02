@@ -2,14 +2,25 @@
   display: none;
 }
 
+.additional-info.is-hidden {
+  display: none;
+}
+
 .button-close {
-  display: inline-block;
-  font-size: 60px;
+  font-size: 30px;
   color: #0d033d;
   position: absolute;
-  top: 8px;
-  right: 25px;
+  top: -10px;
+  right: -5px;
   cursor: pointer;
+  display: inline-block;
+  padding: 10px 20px;
+  font-weight: bold;
+  transition: .4s linear;
+}
+
+.button-close:hover {
+  color: white;
 }
 
 .modal-overlay {
@@ -17,17 +28,16 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  //height: 100%;
   background: rgba(0, 0, 0, 0.6);
   z-index: 9999
 }
 
 .modal {
   display: block;
-  padding: 20px 30px;
+  padding: 40px;
   width: 90%;
   max-height: calc(100% - 150px);
-  overflow-y: scroll;
   position: relative;
   min-height: 300px;
   margin: 5% auto 0;
@@ -47,9 +57,13 @@
 //  display: inline-block;
 //  margin: 10px;
 //}
-.open{
-  background: #000000;
+.open-card {
+  background: #2b1f1e;
 }
-.close{
-  background: #333333;
+.close-card {
+  background: #555555;
+}
+
+.card {
+  width: 300px;
 }

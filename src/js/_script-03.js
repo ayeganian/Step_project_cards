@@ -18,6 +18,7 @@ class Form {
         this.authorise(data).then(response => {
           this.getCards(response);
         })
+        this._form.closest(".modal-overlay").classList.add('is-hidden');
       }
           const selectedDoctor = this._form.previousElementSibling.value;
           if (e.target.className.includes('doctor-select-form')) {
@@ -151,6 +152,7 @@ class CardioForm extends Form {
     fullName.render(this._form);
     cardSubmit.render(this._form);
   }
+
 }
 
 class DantistForm extends Form {

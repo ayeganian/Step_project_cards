@@ -66,23 +66,30 @@ class Visit {
 
   render(wrapper) {
     this._card = document.createElement("div");
-    this._card.classList.add('drag-card', 'card', 'border-primary', 'm-3', 'bg-dark', 'flex-grow-1', 'align-self-start');
+    this._card.classList.add('drag-card', 'card', 'm-3', 'bg-dark', 'align-self-start', 'draggable-item');
+    this._card.setAttribute('draggable', 'true');
+    this._card.id = this._id;
 
     this._card.innerHTML = `
-       <div class="card-body text-white text-center mx-2 ${this._status}-card" id=${this._id}>
+       <div class="card-body text-white text-center ${this._status}-card">
          <h3 class="card-title"><span class="text-info">Full Name: </span>${this._fullName}</h3>
          <h5 class="card-title"><img class="card-logo mr-2 rounded-circle"><span class="text-info">Doctor: </span>${this._doctor}</h5>
-         <div class="additional-info hidden" id="additional-info"></div>
+         <div class="additional-info is-hidden" id="additional-info"></div>
            <button class="show-more btn btn-success m-2" >Show more</button>
            <button class="btn btn-primary m-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton" >Edit</button>
              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                <button class="dropdown-item update-card" onclick="openModal()">Edit</button>
-                 <a class="dropdown-item delete-card" >Delete</a>
-                   <a class="dropdown-item change-status" >Finish</a>
+                 <button class="dropdown-item delete-card" >Delete</button>
+                   <button class="dropdown-item change-status" >Finish</button>
          </div>
        </div>`;
 
     wrapper.insertAdjacentElement('afterbegin', this._card);
+
+    const dragLink = document.querySelectorAll(".draggable-item");
+    dragLink.forEach(item => {
+      item.addEventListener("dragstart", drag);
+    });
 
     // visitArr.push(this._card);
 
@@ -124,6 +131,7 @@ class Visit {
     const newForm = new Form(this._card._id, ...args);
   }
 
+
   // postCard(data) {
   //   return new Promise((resolve, reject) => {
   //     axios.post('cards', data,)
@@ -137,6 +145,22 @@ class Visit {
   // }
 
 }
+
+function allowDrop(e) {
+  e.preventDefault();
+}
+function drag(e) {
+  e.dataTransfer.setData('text', e.target.id)
+}
+function drop(e) {
+  e.preventDefault();
+  const data = e.dataTransfer.getData('text');
+  this.appendChild(document.getElementById(data))
+}
+const dragContainer = document.getElementById('card-container');
+
+dragContainer.addEventListener("drop", drop);
+dragContainer.addEventListener("dragover", allowDrop);
 
 class VisitCardio extends Visit {
   constructor(data, ...classArr) {
@@ -160,7 +184,7 @@ class VisitCardio extends Visit {
           event.target.textContent = 'Hide'
         }
         const cardContent = this._card.querySelector('.additional-info');
-        cardContent.classList.toggle('hidden');
+        cardContent.classList.toggle('is-hidden');
         cardContent.innerHTML = `<div><span class="text-info">Pressure: </span>${this._pressure}</div>
                        <div><span class="text-info">Weight Index: </span>${this._weightIndex}</div>
                        <div><span class="text-info">Diseases: </span>${this._diseases}</div>
@@ -172,11 +196,14 @@ class VisitCardio extends Visit {
         this.updateStatus(this._status);
       }
     });
+
     const updateBtn = this._card.querySelector('.update-card');
     const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
     updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
-  }
+    const updateForm = new CardioForm(modalVisitUpdate);
+    updateForm.render(document.querySelector("#card-update"));
 
+  }
 }
 
 class VisitDentist extends Visit {
