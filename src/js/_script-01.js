@@ -47,38 +47,47 @@ class Select {
 
 class Visit {
   constructor(data) {
+    // this._data = data;
+    this._status = null;
+    this._fullName = null;
+    this._doctor = null;
     this._card = null;
     this._status = 'open';
     this._visit = data['visit-purpose'];
-    this._description = data.description;
+    this._description = data['description'];
     this._priority = data['priority-select'];
     this._fullName = data['full-name'];
     this._info = null;
     this._doctor = '';
+    this._id = data['id'];
     this._icon = ['icon.png', 'icon2.png', 'icon3.png'];
-    this.postCard(data).then(response => response).then(result => this._id = result)
+    // this.postCard(data).then(response => response).then(result => this._id = result)
   }
 
   render(wrapper) {
     this._card = document.createElement("div");
-    this._card.classList.add('my-3', 'drag-card', 'card', 'border-primary', 'm-3', 'bg-dark');
-    this._card.id = this._id;
-    this._card.innerHTML = `<div class="card-body text-white text-center mx-2 ${this._status}-card">
-       <h3 class="card-title"><span class="text-info">Full Name: </span>${this._fullName}</h3>
-        <h5 class="card-title"><img class="card-logo mr-2 rounded-circle"><span class="text-info">Doctor: </span>${this._doctor}</h5>
-       <div class="additional-info hidden" id="additional-info"></div>
-       <button class="show-more btn btn-success m-2" >Show more</button>
-       <button class="btn btn-primary m-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton" >Edit</button>
-       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <button class="dropdown-item update-card" onclick="openModal()">Edit</button>
-    <a class="dropdown-item delete-card" >Delete</a>
-    <a class="dropdown-item change-status" >Finish</a>
-  </div></div>`;
-    wrapper.append(this._card);
-    visitArr.push(this._card);
+    this._card.classList.add('drag-card', 'card', 'border-primary', 'm-3', 'bg-dark', 'flex-grow-1', 'align-self-start');
+
+    this._card.innerHTML = `
+       <div class="card-body text-white text-center mx-2 ${this._status}-card" id=${this._id}>
+         <h3 class="card-title"><span class="text-info">Full Name: </span>${this._fullName}</h3>
+         <h5 class="card-title"><img class="card-logo mr-2 rounded-circle"><span class="text-info">Doctor: </span>${this._doctor}</h5>
+         <div class="additional-info hidden" id="additional-info"></div>
+           <button class="show-more btn btn-success m-2" >Show more</button>
+           <button class="btn btn-primary m-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton" >Edit</button>
+             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+               <button class="dropdown-item update-card" onclick="openModal()">Edit</button>
+                 <a class="dropdown-item delete-card" >Delete</a>
+                   <a class="dropdown-item change-status" >Finish</a>
+         </div>
+       </div>`;
+
+    wrapper.insertAdjacentElement('afterbegin', this._card);
+
+    // visitArr.push(this._card);
 
     this._card.addEventListener('click', (event) => {
-   if (event.target.classList.contains("update-card")) {
+    if (event.target.classList.contains("update-card")) {
      console.log('We need to update card');
       } else if (event.target.classList.contains("delete-card")) {
       this.deleteCard(this._id)
@@ -115,17 +124,17 @@ class Visit {
     const newForm = new Form(this._card._id, ...args);
   }
 
-  postCard(data) {
-    return new Promise((resolve, reject) => {
-      axios.post('cards', data,)
-          .then((response) => {
-            resolve(response.data.id);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-    })
-  }
+  // postCard(data) {
+  //   return new Promise((resolve, reject) => {
+  //     axios.post('cards', data,)
+  //         .then((response) => {
+  //           resolve(response.data.id);
+  //         })
+  //         .catch((error) => {
+  //           reject(error);
+  //         });
+  //   })
+  // }
 
 }
 
