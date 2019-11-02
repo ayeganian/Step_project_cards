@@ -1,16 +1,40 @@
-#form-section{
+#form-section {
   height: 50vh;
   background-image: url("/img/176850.jpg");
   background-size: cover;
 
 }
-.blackout{
+
+.blackout {
   background-color: rgba(0, 0, 0, 0.5);
   height: 50vh;
   width: 100%;
   position: absolute;
   z-index: 1;
 }
+
+.form-container {
+  height: 50vh;
+  width: 80vw;
+  position: absolute;
+  z-index: 99;
+}
+.has-search .form-control {
+  padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+}
+
 
 //#test-form{
 //  width: 100px;
@@ -19,6 +43,6 @@
 //}
 
 //FORM LOGIN
-#login-form-email{
+#login-form-email {
   background: #000;
 }
