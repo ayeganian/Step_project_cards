@@ -4,11 +4,11 @@
 
 .button-close {
   display: inline-block;
-  width: 16px;
-  height: 16px;
+  font-size: 60px;
+  color: #0d033d;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 25px;
   cursor: pointer;
 }
 
@@ -31,26 +31,25 @@
   position: relative;
   min-height: 300px;
   margin: 5% auto 0;
-  background: #fff;
+  background: #b1c8ff;
   z-index: 9999;
 }
-
-.card-content {
-  width: 100px;
-  height: 100px;
-  background-color: firebrick;
-  display: inline-block;
-  margin: 10px;
+//.login-wrapper{
+//  display: flex;
+//  flex-wrap: wrap;
+//  justify-content: space-around;
+//  align-content: center;
+//}
+//.card-content {
+//  width: 100px;
+//  height: 100px;
+//  background-color: firebrick;
+//  display: inline-block;
+//  margin: 10px;
+//}
+.open{
+  background: #000000;
 }
-
-.additional-info.hidden {
-  display: none;
-}
-
-.close-card {
-  background-color: #6c757d;
-}
-
-.open-card {
-  background-color: #343a40;;
+.close{
+  background: #333333;
 }

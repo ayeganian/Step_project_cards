@@ -14,9 +14,11 @@ class Form {
     this._form.addEventListener("submit", (e) => {
       e.preventDefault();
       const data =  this.serialize();
-        if (this._form.id === 'login-form') {
-          // this._requestLogin(data);
-          }
+      if (this._form.id === 'login-form') {
+        this.authorise(data).then(response => {
+          this.getCards(response);
+        })
+      }
           const selectedDoctor = this._form.previousElementSibling.value;
           if (e.target.className.includes('doctor-select-form')) {
             if (selectedDoctor === 'Cardio') {
@@ -47,87 +49,48 @@ class Form {
     });
     return obj;
   }
-  _requestLogin(data) {
-    const authOptions = {
-    method: 'POST',
-    url: 'http://cards.danit.com.ua/login',
-    data: JSON.stringify(data),
-  };
-        axios(authOptions)
-            .then(function(response) {
-                if (response.data.status !== 'Success') {
-                    const errorLogin = document.createElement('p');
-                    document.querySelector('#login-form').insertAdjacentElement('beforeend', errorLogin);
-                    errorLogin.textContent = 'Неправильно введен логин или пароль';
-                } else {
-                    const loginButton = document.querySelector('.login-btn');
-                    // loginButton.innerText = '+ Создать';
-                    loginButton.classList.add('is-hidden');
-                }
 
-        console.log(response);
-        console.log(response.data);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-
-    axios.post("/login", data).then(response => console.log(response));
-  }
-  _requestGetCards(data) {
-      const token = '8eca04c25c57';
-      const authOptions = {
-          method: 'GET',
-          url: 'http://cards.danit.com.ua/cards',
-          data: JSON.stringify(data),
-          headers: {
-              Authorization: `Bearer ${token}`,
-          }
-      };
-
-      axios(authOptions)
-          .then(function(response) {
-              if (response.status !== 200) {
-                  console.log('Карточки не получены');
-              } else {
-                  console.log('Карточки получены');
-              }
-              console.log(response);
-              console.log(response.data);
+  authorise(data) {
+    return new Promise((resolve, reject) => {
+      axios.post('login', data, {})
+          .then((response) => {
+            localStorage.setItem('token', JSON.stringify(response.data.token));
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + (JSON.parse(localStorage.getItem('token')));
+            const headerLoginBtn = document.querySelector('.login-btn');
+            const headerСreateBtn = document.querySelector('.add-card-btn');
+             headerLoginBtn.classList.toggle('is-hidden');
+            headerСreateBtn.classList.toggle('is-hidden');
+            resolve(response.data.token);
           })
-          .catch(function(error) {
-              console.log(error);
+          .catch((error) => {
+            reject(error);
           });
-
-      axios.get("/cards", data).then(response => console.log(response));
+    })
   }
 
-    _requestAddCards(data) {
-        const token = '8eca04c25c57';
-        const authOptions = {
-            method: 'POST',
-            url: 'http://cards.danit.com.ua/cards',
-            data: JSON.stringify(data),
-            headers: {
-                Authorization: `Bearer ${token}`,
+  getCards() {
+    axios.get('cards')
+        .then((response) => {
+          console.log((response.data));
+
+          response.data.forEach(card => {
+            if (card['cardio-select']) {
+              const cardioCard = new VisitCardio(card);
+              cardioCard.render(document.querySelector('.cards-desk'));
+            } else if (card['dantist-select']) {
+              const dentistCard = new VisitDentist(card);
+              dentistCard.render(document.querySelector('.cards-desk'));
+            } else if (card['therapist-select']) {
+              const therapistCard = new VisitTherapist(card);
+              therapistCard.render(document.querySelector('.cards-desk'));
             }
-        };
-
-        axios(authOptions)
-            .then(function(response) {
-                if (response.status !== 200) {
-                    console.log('Карточка не добавлена');
-                } else {
-                    console.log('Карточка добавлена');
-                    data = response.data;
-                }
-            })
-            .catch(function(error) {
-                // console.log(error);
-            });
-        axios.post("/cards", data).then(response => console.log(response));
-    }
-
+          });
+          // ТУТ ПОЯВЛЯЕТСЯ МАССИВ С ОБЪЕКТАМИ- КАРТОЧКАМИ КОТОРЫЕ НАДО ВЫВОДИТЬ
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  }
 }
 
 class CardioForm extends Form {

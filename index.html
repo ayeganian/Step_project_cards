@@ -18,15 +18,19 @@
 <div class="med-page">
 
   <header>
+    <div class="is-hidden modal-overlay" id="add-card-modal">
+      <div class="modal" id="card-modal">
+        <span class="button-close">×</span>
+      </div>
+    </div>
     <nav class="navbar   text-white ">
       <a href="#" class="navbar-brand">
         <img class="logo-img" src="/img/medical-logo-png-5.png" alt="logo">
         <span class="text-white text-uppercase font-weight-bold font-italic">Medical site</span>
       </a>
       <button class="btn btn-outline-success bg-dark text-uppercase font-weight-bold font-italic my-2 my-sm-0 login-btn"
-              onclick="openModal()" type="submit">Login
-      </button>
-
+              onclick="openModal()" type="submit">Login</button>
+      <button class="is-hidden btn btn-outline-success my-2 my-sm-0 add-card-btn" onclick="openModal()" type="submit">Create</button>
     </nav>
     <div class="is-hidden modal-overlay login-wrapper" id="login-modal">
       <div class="modal" id="modal">
@@ -46,21 +50,13 @@
 
   <section id="desk-section">
     <div class="cards-desk d-flex flex-wrap justify-content-start align-items-center p-5 container m-5 border mx-auto">
-      <div class="is-hidden modal-overlay" id="add-card-modal">
-        <div class="modal" id="card-modal">
-          <span class="button-close">×</span>
-        </div>
-      </div>
-     ​
       <div class="is-hidden modal-overlay" id="update-card-modal">
         <div class="modal" id="card-update">
           <span class="button-close">×</span>
         </div>
       </div>
       <!--     div with cards-->
-      <div class="d-flex flex-wrap justify-content-start align-items-center p-5">
-        <button class="btn btn-outline-success my-2 my-sm-0 add-card-btn" onclick="openModal()" type="submit">+</button>
-
+<!--      <div class="append-here d-flex flex-wrap justify-content-between align-items-center p-5 ">-->
         <!--bootstrap card-->
         <!--        <div class="card border-primary m-3" style="width: 15vw;">
                   <div class="card-body bg-dark text-white text-center ">
@@ -94,7 +90,7 @@
                   </div>
                 </div>-->
 
-      </div>
+<!--      </div>-->
     </div>
   </section>
 
