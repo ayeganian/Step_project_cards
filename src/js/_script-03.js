@@ -21,19 +21,21 @@ class Form {
       }
           const selectedDoctor = this._form.previousElementSibling.value;
           if (e.target.className.includes('doctor-select-form')) {
-            if (selectedDoctor === 'Cardio') {
-              const visitCardio = new VisitCardio(data);
-              visitCardio.render(document.querySelector('.cards-desk'));
-              // this._requestCards(data);
-            } else if (selectedDoctor === 'Dantist') {
-              const visitDentist = new VisitDentist(data);
-              visitDentist.render(document.querySelector('.cards-desk'));
-              // this._requestCards(data);
-            } else if (selectedDoctor === 'Therapist') {
-              const visitTherapist = new VisitTherapist(data);
-              visitTherapist.render(document.querySelector('.cards-desk'));
-              // this._requestCards(data);
+            switch (selectedDoctor) {
+              case 'Cardio':
+                  const visitCardio = new VisitCardio(data);
+                  visitCardio.render(document.querySelector('.cards-desk'));
+                  break;
+              case 'Dantist':
+                  const visitDentist = new VisitDentist(data);
+                  visitDentist.render(document.querySelector('.cards-desk'));
+                  break;
+              case 'Therapist':
+                  const visitTherapist = new VisitTherapist(data);
+                  visitTherapist.render(document.querySelector('.cards-desk'));
+                  break;
             }
+            this.postCard(data);
             this._form.closest(".modal-overlay").classList.add('is-hidden');
           }
     });
@@ -72,6 +74,23 @@ class Form {
     axios.get('cards')
         .then((response) => {
           console.log((response.data));
+          //УДАЛИТЬ ВСЕ КАРТОЧКИ С СЕРВЕРА
+          // response.data.forEach(card => {
+          //   return new Promise((resolve, reject) => {
+          //     const authOptions = {
+          //       method: 'DELETE',
+          //       url: `cards/${card.id}`,
+          //     }
+          //     axios(authOptions).then((response) => {
+          //       resolve(response);
+          //     })
+          //         .catch((error) => {
+          //           reject(error);
+          //         });
+          //   }).then(response => {
+          //     console.log(response);
+          //   })
+          // });
 
           response.data.forEach(card => {
             if (card['cardio-select']) {
@@ -85,12 +104,23 @@ class Form {
               therapistCard.render(document.querySelector('.cards-desk'));
             }
           });
-          // ТУТ ПОЯВЛЯЕТСЯ МАССИВ С ОБЪЕКТАМИ- КАРТОЧКАМИ КОТОРЫЕ НАДО ВЫВОДИТЬ
         })
         .catch((error) => {
           console.log(error);
         });
   }
+  postCard(data) {
+    return new Promise((resolve, reject) => {
+      axios.post('cards', data,)
+          .then((response) => {
+            resolve(response.data.id);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+    })
+  }
+
 }
 
 class CardioForm extends Form {
