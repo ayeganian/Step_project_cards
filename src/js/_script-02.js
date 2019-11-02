@@ -19,4 +19,8 @@ class Input {
     input.required = this._required;
     container.appendChild(input);
   }
+
+//   updateInput() {
+//    this._placeholder = this._value
+// }
 }
