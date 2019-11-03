@@ -17,6 +17,12 @@ class Input {
     input.value = this._value;
     input.name = this._name;
     input.required = this._required;
+    // if (input.type === 'submit' || input.type === 'button') {
+    //   input.className = 'btn btn-primary';
+    // } else {
+    //   input.className = 'form-control';
+    // }
+
     container.appendChild(input);
   }
 
