@@ -219,7 +219,7 @@ class VisitDentist extends Visit {
     this._card.addEventListener('click', (event) => {
       if (event.target.classList.contains("show-more")) {
         const cardContent = this._card.querySelector('.additional-info');
-        cardContent.classList.toggle('hidden');
+        cardContent.classList.toggle('is-hidden');
         cardContent.innerHTML = `<div><span class="text-info">Date: </span>${this._date}</div>`
       } else if (event.target.classList.contains("update-card")) {
       } else if (event.target.classList.contains("delete-card")) {
@@ -247,7 +247,7 @@ class VisitTherapist extends Visit {
     this._card.addEventListener('click', (event) => {
       if (event.target.classList.contains("show-more")) {
         const cardContent = this._card.querySelector('.additional-info');
-        cardContent.classList.toggle('hidden');
+        cardContent.classList.toggle('is-hidden');
         cardContent.innerHTML = `<div><span class="text-info">Age: </span>${this._age}</div>`
       } else if (event.target.classList.contains("update-card")) {
       } else if (event.target.classList.contains("delete-card")) {
