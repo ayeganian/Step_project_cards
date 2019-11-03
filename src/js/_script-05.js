@@ -56,6 +56,21 @@ selectDoctor.addEventListener('change', function () {
   }
 });
 
+const searchForm = new Form('GET', 'search-form', 'form-inline', 'd-flex', 'justify-content-between');
+searchForm.render(document.querySelector('#filter-section .container'));
+
+const titleInput = new Input('search', 'Search by title',  'title', '', 'title-search', '', 'form-control');
+titleInput.render(document.querySelector('#search-form'));
+
+let statusSelect = new Select('status-select', 'status-select', 'all', 'open', 'done');
+statusSelect.render(document.querySelector('#search-form'));
+
+let prioritySelect = new Select('priority-select', 'priority-select', 'all', 'high', 'medium', 'low');
+prioritySelect.render(document.querySelector('#search-form'));
+
+const searchButton = new Input('submit', '', 'search-btn', 'Search', 'searchBtn', '', 'btn', 'btn btn-primary');
+searchButton.render(document.querySelector('#search-form'));
+
 // let select = new Select('add', 'select-doctors',  '-select doctor-', 'Cardio', 'Dantist', 'Therapist');
 // select.render(document.getElementById('visit-modal'));
 //
