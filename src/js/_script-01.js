@@ -48,12 +48,14 @@ class Select {
 class Visit {
   constructor(data) {
     // this._data = data;
-    this._status = null;
+    // this._status = null;
     this._fullName = null;
     this._doctor = null;
     this._card = null;
     this._status = 'open';
-    this._visit = data['visit-purpose'];
+    this._status = data['status-select'] = 'open';
+    this._visit = data['title'];
+    // this.title = data['title'] = this._visit;
     this._description = data['description'];
     this._priority = data['priority-select'];
     this._fullName = data['full-name'];
