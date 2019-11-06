@@ -230,11 +230,16 @@ class VisitDentist extends Visit {
         this.updateStatus(this._status);
       }
     });
-    const updateBtn = this._card.querySelector('.update-card');
-    const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
-    updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
+    // const updateBtn = this._card.querySelector('.update-card');
+    // const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
+    // updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
+    // const updateForm = new DantistForm(modalVisitUpdate);
+    // updateForm.render(document.querySelector("#card-update"));
   }
+
 }
+
+
 
 class VisitTherapist extends Visit {
   constructor(data) {
