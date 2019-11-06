@@ -11,36 +11,48 @@ class Form {
     this._form.id = this._id;
     this._form.className = this._classArr.join(" ");
     this._form.action = this._action;
+
     this._form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const data =  this.serialize();
-      if (this._form.id === 'login-form') {
-        this.authorise(data).then(response => {
-          this.getCards(response);
-        })
-        this._form.closest(".modal-overlay").classList.add('is-hidden');
-      }
-          const selectedDoctor = this._form.previousElementSibling.value;
-          if (e.target.className.includes('doctor-select-form')) {
-            switch (selectedDoctor) {
-              case 'Cardio':
+        e.preventDefault();
+        const data = this.serialize();
+
+        switch (this._form.id) {
+          case 'search-form':
+            container.insertAdjacentElement('afterbegin', this._form);
+            this.getFilterCards(data);
+            break;
+
+          case 'login-form':
+            this.authorise(data).then(response => {
+              this.getCards(response);
+            });
+            this._form.closest(".modal-overlay").classList.add('is-hidden');
+            break;
+
+          default:
+            const selectedDoctor = this._form.previousElementSibling.value;
+            if (e.target.className.includes('doctor-select-form')) {
+              switch (selectedDoctor) {
+                case 'Cardio':
                   const visitCardio = new VisitCardio(data);
                   visitCardio.render(document.querySelector('.cards-desk'));
                   break;
-              case 'Dantist':
+                case 'Dantist':
                   const visitDentist = new VisitDentist(data);
                   visitDentist.render(document.querySelector('.cards-desk'));
                   break;
-              case 'Therapist':
+                case 'Therapist':
                   const visitTherapist = new VisitTherapist(data);
                   visitTherapist.render(document.querySelector('.cards-desk'));
                   break;
+              }
+              this.postCard(data);
+              this._form.closest(".modal-overlay").classList.add('is-hidden');
+              break;
             }
-            this.postCard(data);
-            this._form.closest(".modal-overlay").classList.add('is-hidden');
-          }
+      }
     });
-    container.appendChild(this._form);
+      container.appendChild(this._form);
   }
 
   serialize() {
@@ -92,19 +104,7 @@ class Form {
           //     console.log(response);
           //   })
           // });
-
-          response.data.forEach(card => {
-            if (card['cardio-select']) {
-              const cardioCard = new VisitCardio(card);
-              cardioCard.render(document.querySelector('.cards-desk'));
-            } else if (card['dantist-select']) {
-              const dentistCard = new VisitDentist(card);
-              dentistCard.render(document.querySelector('.cards-desk'));
-            } else if (card['therapist-select']) {
-              const therapistCard = new VisitTherapist(card);
-              therapistCard.render(document.querySelector('.cards-desk'));
-            }
-          });
+          this.showCards(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -121,7 +121,52 @@ class Form {
           });
     })
   }
+  showCards(cards) {
+    cards.forEach(card => {
+      if (card['cardio-select']) {
+        const cardioCard = new VisitCardio(card);
+        cardioCard.render(document.querySelector('.cards-desk'));
+      } else if (card['dantist-select']) {
+        const dentistCard = new VisitDentist(card);
+        dentistCard.render(document.querySelector('.cards-desk'));
+      } else if (card['therapist-select']) {
+        const therapistCard = new VisitTherapist(card);
+        therapistCard.render(document.querySelector('.cards-desk'));
+      }
+    });
+  }
+  cleanDesk() {
+    document.querySelectorAll('.card').forEach(item => item.remove());
+  }
+  getFilterCards(select) {
+    return new Promise((resolve, reject) => {
+      axios.get('cards')
+          .then((response) => {
+            JSON.parse((localStorage.getItem('token')));
+            resolve(response.data);
 
+            const filteredList = response.data.filter((card) => {
+              let result = false;
+              for (let key in select) {
+                if (select[key] === card[key].toLowerCase() || select[key] === 'all') {
+                // if (select[key] === card[key].toLowerCase() || select[key] === 'all' || card[key].toLowerCase().indexOf(select[key].toLowerCase() > -1)) {
+                  result = true;
+                } else {
+                  return result = false;
+                }
+              }
+              return result;
+            });
+            console.log(filteredList);
+            this.cleanDesk();
+            this.showCards(filteredList);
+          })
+          .catch((error) => {
+            reject(error);
+          })
+    });
+
+  }
 }
 
 class CardioForm extends Form {
@@ -130,7 +175,7 @@ class CardioForm extends Form {
   }
   render(container) {
     super.render(container);
-    const visitPurpose = new Input('text', 'Enter purpose of visit', 'visit-purpose', '', '', '', 'form-control', 'my-2');
+    const visitPurpose = new Input('text', 'Enter purpose of visit', 'title', '', '', '', 'form-control', 'my-2');
     const description = new Input('text', 'Description', 'description', '', '', '', 'form-control', 'my-2');
     const selectCardio = new Select('cardio-select', '', 'Ivanov', 'Petrov', 'Sidorov');
     const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
