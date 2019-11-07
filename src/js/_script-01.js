@@ -24,9 +24,10 @@ class Modal {
 }
 
 class Select {
-  constructor(name, id, ...value) {
+  constructor(name, id, width, ...value) {
     this._name = name;
     this._id = id;
+    this._width = width;
     this._value = value;
   }
 
@@ -34,7 +35,7 @@ class Select {
     const select = document.createElement('select');
     select.id = this._id;
     select.setAttribute('name', this._name);
-    select.classList.add('form-control', 'w-25', 'my-2');
+    select.classList.add('form-control', this._width, 'my-2');
     this._value.forEach((item, i) => {
       const option = document.createElement('option');
       option.setAttribute('value', item);
@@ -73,19 +74,21 @@ class Visit {
     this._card.id = this._id;
 
     this._card.innerHTML = `
-       <div class="card-body text-white text-center ${this._status}-card">
-         <h3 class="card-title"><span class="text-info">Full Name: </span>${this._fullName}</h3>
+       <div class="card-body text-white text-center ${this._status}-card ${this._priority.toLowerCase()}-priority">
+         <h3 class="card-title"><span class="text-info d-inline-block w-100">Full Name: </span>${this._fullName}</h3>
          <h5 class="card-title"><img class="card-logo mr-2 rounded-circle"><span class="text-info">Doctor: </span>${this._doctor}</h5>
          <div class="additional-info is-hidden" id="additional-info"></div>
            <button class="show-more btn btn-success m-2" >Show more</button>
            <button class="btn btn-primary m-2 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="dropdownMenuButton" >Edit</button>
              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                <button class="dropdown-item update-card" onclick="openModal()">Edit</button>
-                 <button class="dropdown-item delete-card" >Delete</button>
-                   <button class="dropdown-item change-status" >Finish</button>
-         </div>
-       </div>`;
-
+               <button class="dropdown-item delete-card" >Delete</button>
+               <button class="dropdown-item change-status" >Finish</button>
+             </div>
+         </div>`;
+    const updateBtn = this._card.querySelector('.update-card');
+    const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
+    updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
     wrapper.insertAdjacentElement('afterbegin', this._card);
 
     const dragLink = document.querySelectorAll(".draggable-item");
@@ -192,19 +195,17 @@ class VisitCardio extends Visit {
                        <div><span class="text-info">Diseases: </span>${this._diseases}</div>
                        <div><span class="text-info">Age: </span>${this._age}</div>`
       } else if (event.target.classList.contains("update-card")) {
+        if (document.getElementsByClassName('update-form').length === 1) {
+          document.getElementsByClassName('update-form')[0].remove();
+        }
+        const updateForm = new CardioForm('PUT', '', 'update-form');
+        updateForm.render(document.querySelector("#card-update"));
       } else if (event.target.classList.contains("delete-card")) {
         this._card.remove();
       } else if (event.target.classList.contains("change-status")) {
         this.updateStatus(this._status);
       }
     });
-
-    const updateBtn = this._card.querySelector('.update-card');
-    const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
-    updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
-    const updateForm = new CardioForm(modalVisitUpdate);
-    updateForm.render(document.querySelector("#card-update"));
-
   }
 }
 
@@ -221,20 +222,30 @@ class VisitDentist extends Visit {
     this._card.addEventListener('click', (event) => {
       if (event.target.classList.contains("show-more")) {
         const cardContent = this._card.querySelector('.additional-info');
-        cardContent.classList.toggle('hidden');
+        cardContent.classList.toggle('is-hidden');
         cardContent.innerHTML = `<div><span class="text-info">Date: </span>${this._date}</div>`
       } else if (event.target.classList.contains("update-card")) {
+        if (document.getElementsByClassName('update-form').length === 1) {
+          document.getElementsByClassName('update-form')[0].remove();
+        }
+        const updateForm = new DantistForm('PUT', '', 'update-form');
+        updateForm.render(document.querySelector("#card-update"));
       } else if (event.target.classList.contains("delete-card")) {
         this._card.remove();
       } else if (event.target.classList.contains("change-status")) {
         this.updateStatus(this._status);
       }
     });
-    const updateBtn = this._card.querySelector('.update-card');
-    const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
-    updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
+    // const updateBtn = this._card.querySelector('.update-card');
+    // const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
+    // updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
+    // const updateForm = new DantistForm(modalVisitUpdate);
+    // updateForm.render(document.querySelector("#card-update"));
   }
+
 }
+
+
 
 class VisitTherapist extends Visit {
   constructor(data) {
@@ -246,20 +257,26 @@ class VisitTherapist extends Visit {
   render(wrapper) {
     super.render(wrapper);
     this._card.querySelector('.card-logo').setAttribute('src', "/img/icon3.png");
+    // const updateBtn = this._card.querySelector('.update-card');
+    // const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
+    // updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
     this._card.addEventListener('click', (event) => {
       if (event.target.classList.contains("show-more")) {
         const cardContent = this._card.querySelector('.additional-info');
-        cardContent.classList.toggle('hidden');
+        cardContent.classList.toggle('is-hidden');
         cardContent.innerHTML = `<div><span class="text-info">Age: </span>${this._age}</div>`
       } else if (event.target.classList.contains("update-card")) {
+        if (document.getElementsByClassName('update-form').length === 1) {
+          document.getElementsByClassName('update-form')[0].remove();
+        }
+        const updateForm = new TherapistForm('PUT', '', 'update-form');
+        updateForm.render(document.querySelector("#card-update"));
       } else if (event.target.classList.contains("delete-card")) {
         this._card.remove();
       } else if (event.target.classList.contains("change-status")) {
         this.updateStatus(this._status);
       }
     });
-    const updateBtn = this._card.querySelector('.update-card');
-    const modalVisitUpdate = new Modal(document.getElementById('update-card-modal'));
-    updateBtn.openModal = modalVisitUpdate.open.bind(modalVisitUpdate);
+
   }
 }
