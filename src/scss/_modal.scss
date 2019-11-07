@@ -2,10 +2,6 @@
   display: none;
 }
 
-.additional-info.is-hidden {
-  display: none;
-}
-
 .button-close {
   font-size: 30px;
   color: #0d033d;
@@ -36,7 +32,7 @@
 .modal {
   display: block;
   padding: 40px;
-  width: 90%;
+  width: 80vh;
   max-height: calc(100% - 150px);
   position: relative;
   min-height: 300px;
@@ -57,13 +53,3 @@
 //  display: inline-block;
 //  margin: 10px;
 //}
-.open-card {
-  background: #2b1f1e;
-}
-.close-card {
-  background: #555555;
-}
-
-.card {
-  width: 300px;
-}

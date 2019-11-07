@@ -175,15 +175,15 @@ class CardioForm extends Form {
   }
   render(container) {
     super.render(container);
-    const visitPurpose = new Input('text', 'Enter purpose of visit', 'title', '', '', '', 'form-control', 'my-2');
-    const description = new Input('text', 'Description', 'description', '', '', '', 'form-control', 'my-2');
-    const selectCardio = new Select('cardio-select', '', 'Ivanov', 'Petrov', 'Sidorov');
-    const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
-    const bloodPressure = new Input ('text', 'Pressure', 'pressure', '', '', '', 'form-control', 'my-2');
-    const weightIndex = new Input('number', 'Index', 'weight-index', '', '', '', 'form-control', 'my-2');
-    const diseases = new Input('','Diseases', 'diseases', '', '', '', 'form-control', 'my-2');
-    const age = new Input('number','Age', 'age', '', '', '', 'form-control', 'my-2');
-    const fullName = new Input('','Full name', 'full-name', '', '', '', 'form-control', 'my-2');
+    const visitPurpose = new Input('text', 'Enter purpose of visit', 'title', '', '', 'required', 'form-control', 'my-2');
+    const description = new Input('text', 'Description', 'description', '', '', 'required', 'form-control', 'my-2');
+    const selectCardio = new Select('cardio-select', '', 'w-50', 'Ivanov', 'Petrov', 'Sidorov');
+    const selectPriority = new Select('priority-select', '',  'w-50', 'Low', 'Medium', 'High');
+    const bloodPressure = new Input ('text', 'Pressure', 'pressure', '', '', 'required', 'form-control', 'my-2');
+    const weightIndex = new Input('number', 'Index', 'weight-index', '', '', 'required', 'form-control', 'my-2');
+    const diseases = new Input('','Diseases', 'diseases', '', '', 'required', 'form-control', 'my-2');
+    const age = new Input('number','Age', 'age', '', '', 'required', 'form-control', 'my-2');
+    const fullName = new Input('','Full name', 'full-name', '', '', 'required', 'form-control', 'my-2');
     const cardSubmit = new Input('submit','',  '', 'Отправить', 'id-cardio', '', 'btn', 'btn-primary');
 
     visitPurpose.render(this._form);
@@ -206,12 +206,12 @@ class DantistForm extends Form {
   }
   render(container) {
     super.render(container);
-    const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose', '', '', '', 'form-control', 'my-2');
-    const description = new Input('text', 'Description', 'description', '', '', '', 'form-control', 'my-2');
-    const selectDantist = new Select('dantist-select', '', 'Kurochkin', 'Ytkin', 'Petuh');
-    const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
-    const date = new Input('date', 'date', 'date', '', '', '', 'form-control', 'my-2');
-    const fullName = new Input('','Full name', 'full-name', '', '', '', 'form-control', 'my-2');
+    const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose', '', '', 'required', 'form-control', 'my-2');
+    const description = new Input('text', 'Description', 'description', '', '', 'required', 'form-control', 'my-2');
+    const selectDantist = new Select('dantist-select', '', 'w-50', 'Kurochkin', 'Ytkin', 'Petuh');
+    const selectPriority = new Select('priority-select', '', 'w-50', 'Low', 'Medium', 'High');
+    const date = new Input('date', 'date', 'date', '', '', 'required', 'form-control', 'my-2');
+    const fullName = new Input('','Full name', 'full-name', '', '', 'required', 'form-control', 'my-2');
     const cardSubmit = new Input('submit', '', '', 'Отправить', '', '', 'btn', 'btn-primary');
 
     visitPurpose.render(this._form);
@@ -230,12 +230,12 @@ class TherapistForm extends Form {
   }
   render(container) {
     super.render(container);
-    const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose', '', '', '', 'form-control', 'my-2');
-    const description = new Input('', 'Description', 'description', '', '', '', 'form-control', 'my-2');
-    const selectTherapist = new Select('therapist-select', '', 'Monatik', 'Maruv', 'Loboda');
-    const selectPriority = new Select('priority-select', '', 'Low', 'Medium', 'High');
-    const age = new Input('number','Age', 'age', '', '', '', 'form-control', 'my-2');
-    const fullName = new Input('','Full name', 'full-name', '', '', '', 'form-control', 'my-2');
+    const visitPurpose = new Input('', 'Enter purpose of visit', 'visit-purpose', '', '', 'required', 'form-control', 'my-2');
+    const description = new Input('', 'Description', 'description', '', '', 'required', 'form-control', 'my-2');
+    const selectTherapist = new Select('therapist-select', '', 'w-50', 'Monatik', 'Maruv', 'Loboda');
+    const selectPriority = new Select('priority-select', '', 'w-50', 'Low', 'Medium', 'High');
+    const age = new Input('number','Age', 'age', '', '', 'required', 'form-control', 'my-2');
+    const fullName = new Input('','Full name', 'full-name', '', '', 'required', 'form-control', 'my-2');
     const cardSubmit = new Input('submit', '', '', 'Отправить', '', '', 'btn', 'btn-primary');
 
     visitPurpose.render(this._form);
